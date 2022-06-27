@@ -1,0 +1,23 @@
+.gsc-chart{
+   text-align: center;
+   .pieChart{
+      span{
+         font-size: 18px;
+         color: $black;
+      }
+   }
+   .content{
+      text-align: center;
+      > div{
+         display: block;
+      }
+      .icon{
+         font-size: 25px;
+         margin-top: 5px;
+      }
+      .title{
+         font-size: 22px;
+         margin: 30px 0 25px;
+      }
+   }
+}

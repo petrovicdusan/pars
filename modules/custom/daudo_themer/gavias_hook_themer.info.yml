@@ -1,0 +1,7 @@
+type: module
+name : Gavias Daudo Themer
+description : Gavias Daudo Themer
+package: gavias
+version: '9.x'
+core_version_requirement: ^8.8 || ^9
+project: 'gavias_hook_themer'

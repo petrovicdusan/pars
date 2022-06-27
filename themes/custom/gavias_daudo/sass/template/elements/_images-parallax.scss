@@ -1,0 +1,121 @@
+.gsc-images-parallax{
+  width: 720px;
+  max-width: 100%;
+  @include clearfix();
+  margin: 0 auto;
+  .images{
+    position: relative;
+  }
+  .action{
+    margin-top: 15px;
+  }
+  &.style-v1{
+    margin-bottom: 60px;
+    .images{
+      position: relative;
+      text-align: center;
+      @include media-breakpoint-down(sm){
+        max-width: 650px;
+        float: none;
+        margin: 0 auto;
+      }
+    }
+    .content-box{
+      @include size(169px, 169px);
+      border-radius: 50%;
+      background: $theme_color;
+      color: $white;
+      text-align: center;
+      padding: 10px 20px 10px;
+      position: absolute;
+      top: 45px;
+      left: 0;
+      z-index: 99;
+      font-size: 18px;
+      line-height: 26px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $headings-font-family;
+      .icon{
+        display: block;
+        width: 100%;
+        margin-bottom: 5px; 
+        font-size: 46px;
+        line-height: 50px;
+        font-weight: 400;
+      }
+      a{
+        color: $white;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+      @include media-breakpoint-down(lg){
+        @include size(150px, 150px);
+        font-size: 17px;
+        .icon{
+          font-size: 45px;
+          line-height: 45px;
+        }
+      }
+      @include media-breakpoint-down(md){
+        @include size(120px, 120px);
+        font-size: 14px;
+        .icon{
+          font-size: 35px;
+          line-height: 35px;
+        }
+      }
+      
+    }  
+    &.right{
+      .image-1{
+        position: relative;
+        z-index: 1;
+        padding-right: 90px; 
+      }
+      .image-2{
+        position: absolute;
+        bottom: -120px;
+        right: 0;
+        z-index: 9;
+        padding: 15px;
+        text-align: right;
+        background: $white;
+        max-width: 80%;
+        box-shadow: 0px 6px 21px 3px rgba(0, 0, 0, 0.1);
+        @include media-breakpoint-down(sm){
+          bottom: 0!important;
+        }
+      }
+      .content-box{
+        left: auto;
+        right: 0;
+      }
+    }
+
+    &.left{
+      .image-1{
+        position: relative;
+        z-index: 1;
+        padding-left: 90px;
+      }
+      .image-2{
+        position: absolute;
+        bottom: -120px;
+        left: 0;
+        z-index: 9;
+        padding: 15px;
+        text-align: left;
+        background: $white;
+        max-width: 80%;
+        box-shadow: 0px 6px 21px 3px rgba(0, 0, 0, 0.1);
+        @include media-breakpoint-down(sm){
+          bottom: 0!important;
+        }
+      }
+    }
+  }
+}

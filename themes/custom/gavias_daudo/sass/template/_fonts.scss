@@ -1,0 +1,34 @@
+@font-face { 
+	font-family: 'gilmer'; 
+	src: url('#{$theme-font-path}gilmer/GilmerBold.ttf') format('ttf'),
+	url('#{$theme-font-path}gilmer/GilmerBold.woff') format('woff'), 
+	url('#{$theme-font-path}gilmer/GilmerBold.eot') format('eot'),
+	url('#{$theme-font-path}gilmer/GilmerBold.otf') format('otf');
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'gilmer';
+	src: url('#{$theme-font-path}gilmer/GilmerMedium.eot?#iefix') format('embedded-opentype'),
+	url('#{$theme-font-path}gilmer/GilmerMedium.otf')  format('opentype'),
+	url('#{$theme-font-path}gilmer/GilmerMedium.woff') format('woff'), 
+	url('#{$theme-font-path}gilmer/GilmerMedium.ttf')  format('truetype'), 
+	url('#{$theme-font-path}gilmer/GilmerMedium.svg#GilmerMedium') format('svg');
+  	font-weight: 500;
+  	font-style: normal;
+  	font-display: swap;
+}
+
+@font-face { 
+	font-family: 'gilmer';
+	src: url('#{$theme-font-path}gilmer/GilmerRegular.eot?#iefix') format('embedded-opentype'),
+	url('#{$theme-font-path}gilmer/GilmerRegular.otf')  format('opentype'),
+	url('#{$theme-font-path}gilmer/GilmerRegular.woff') format('woff'), 
+	url('#{$theme-font-path}gilmer/GilmerRegular.ttf')  format('truetype'), 
+	url('#{$theme-font-path}gilmer/GilmerRegular.svg#GilmerRegular') format('svg');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
