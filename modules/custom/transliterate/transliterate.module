@@ -1,0 +1,212 @@
+<?php
+
+use Drupal\transliterate\TransliterateTranslationSync;
+use \Drupal\transliterate\Plugin\Transliterator\Transliterator;
+
+define('SR', 'sr');
+define('SR_LAT', 'sr-lat');
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter()
+ *
+ * @param $form
+ * @param $form_state
+ * @param $form_id
+ */
+function transliterate_form_node_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $form_state->getFormObject()->getEntity();
+  if(_is_auto_transliterate_enabled_for_content_type($node->getType())) {
+    $res = _auto_transliterate_check_nodes_sync($node);
+    $form['#attached']['library'][] = 'transliterate/transliterate';
+    $form['#attached']['drupalSettings']['autoTransliterate'] = [
+      'IN_SYNC' => $res['inSync'],
+      'MESSAGE' => $res['message']
+    ];
+  }
+}
+
+/**
+ * Implements hook_cron().
+ *
+ */
+function transliterate_cron() {
+  TransliterateTranslationSync::syncTranslations();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ * After new node is inserted
+ *
+ * @param \Drupal\node\NodeInterface $node
+ */
+function transliterate_node_insert(Drupal\node\NodeInterface $node) {
+  $contentType = $node->getType();
+  if(_is_auto_transliterate_enabled_for_content_type($contentType)) {
+    $ctConfigs = \Drupal::config('transliterate.settings')->get('content_types') ?? [];
+    $ctConfig = array_key_exists($contentType, $ctConfigs) ? $ctConfigs[$contentType] : [];
+    $ctConfigFields = array_key_exists('fields', $ctConfig) ? $ctConfig['fields'] : [];
+    $langCode = $node->get('langcode')->value;
+    if ($langCode == SR) {
+      $isChanged = false;
+      $translations = [];
+      $nodeTransFields = $node->getTranslatableFields();
+      foreach (array_intersect(array_keys($nodeTransFields), $ctConfigFields) as $fieldName) {
+        if ($node->hasField($fieldName)) {
+          $isChanged = true;
+          $field = $node->get($fieldName);
+          $fieldValue = $field->getValue();
+
+          $translatedValue = $fieldValue;
+          if (is_string($fieldValue)) {
+            $translatedValue = Transliterator::cyr2lat($fieldValue);
+          } elseif (is_array($fieldValue) && count($fieldValue) > 0) {
+            foreach ($fieldValue as $key => $value) {
+              if (isset($fieldValue[0]['value'])) {
+                $translatedValue[$key]['value'] = is_string($translatedValue[$key]['value']) ?
+                  Transliterator::cyr2lat($translatedValue[$key]['value']) : $translatedValue[$key]['value'];
+              }
+              if (isset($fieldValue[0]['description'])) {
+                $translatedValue[$key]['description'] = is_string($translatedValue[$key]['description']) ?
+                  Transliterator::cyr2lat($translatedValue[$key]['description']) : $translatedValue[$key]['description'];
+              }
+              if (isset($fieldValue[0]['title'])) {
+                $translatedValue[$key]['title'] = is_string($translatedValue[$key]['title']) ?
+                  Transliterator::cyr2lat($translatedValue[$key]['title']) : $translatedValue[$key]['description'];
+              }
+              if (isset($fieldValue[0]['alt'])) {
+                $translatedValue[$key]['alt'] = is_string($translatedValue[$key]['alt']) ?
+                  Transliterator::cyr2lat($translatedValue[$key]['alt']) : $translatedValue[$key]['alt'];
+              }
+            }
+          }
+
+          $translations[$fieldName] = $translatedValue;
+        }
+      }
+      if ($isChanged) {
+        try {
+          $node->addTranslation(SR_LAT, $translations)->save();
+        } catch (Exception $e) {
+          $a = 1;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for node entities.
+ * @param \Drupal\node\NodeInterface $node
+ */
+function transliterate_node_presave(Drupal\node\NodeInterface $node) {
+  $contentType = $node->getType();
+  if(!$node->isNew() && _is_auto_transliterate_enabled_for_content_type($contentType)) {
+    $ctConfigs = \Drupal::config('transliterate.settings')->get('content_types') ?? [];
+    $ctConfig = array_key_exists($contentType, $ctConfigs) ? $ctConfigs[$contentType] : [];
+    $ctConfigFields = array_key_exists('fields', $ctConfig) ? $ctConfig['fields'] : [];
+    $langCode = $node->get('langcode')->value;
+    if ($langCode == SR) {
+      $latNode = _node_has_translation($node, SR_LAT) ? $node->getTranslation(SR_LAT) : $node->addTranslation(SR_LAT);
+      $nodeTransFields = $latNode->getTranslatableFields();
+      foreach (array_intersect(array_keys($nodeTransFields), $ctConfigFields) as $fieldName) {
+        if ($latNode->hasField($fieldName)) {
+          $field = $node->get($fieldName);
+          $fieldValue = $field->getValue();
+
+          $translatedValue = $fieldValue;
+          if (is_string($fieldValue)) {
+            $translatedValue = Transliterator::cyr2lat($fieldValue);
+          } elseif (is_array($fieldValue) && count($fieldValue) > 0) {
+            foreach ($fieldValue as $key => $value) {
+              if (isset($fieldValue[0]['value'])) {
+                $translatedValue[$key]['value'] = is_string($translatedValue[$key]['value']) ?
+                  Transliterator::cyr2lat($translatedValue[$key]['value']) : $translatedValue[$key]['value'];
+              }
+              if (isset($fieldValue[0]['description'])) {
+                $translatedValue[$key]['description'] = is_string($translatedValue[$key]['description']) ?
+                  Transliterator::cyr2lat($translatedValue[$key]['description']) : $translatedValue[$key]['description'];
+              }
+              if (isset($fieldValue[0]['title'])) {
+                $translatedValue[$key]['title'] = is_string($translatedValue[$key]['title']) ?
+                  Transliterator::cyr2lat($translatedValue[$key]['title']) : $translatedValue[$key]['description'];
+              }
+              if (isset($fieldValue[0]['alt'])) {
+                $translatedValue[$key]['alt'] = is_string($translatedValue[$key]['alt']) ?
+                  Transliterator::cyr2lat($translatedValue[$key]['alt']) : $translatedValue[$key]['alt'];
+              }
+            }
+          }
+
+          $latNode->{$fieldName} = $translatedValue;
+        }
+      }
+      $latNode->setNewRevision(true);
+    }
+  }
+}
+
+/**
+ * Check if a node as a translation for the given language.
+ *
+ * @param object $node
+ *   The node object.
+ * @param string $langcode
+ *   The langcode.
+ *
+ * @return bool
+ *   True (exists) or false (does not exist).
+ */
+function _node_has_translation(Drupal\node\NodeInterface $node, string $langcode): bool {
+  $existing_translation = \Drupal::service('entity.repository')->getTranslationFromContext($node, $langcode);
+  return $node->hasTranslation($langcode) ||
+  $existing_translation->langcode->value === $langcode;
+}
+
+/**
+ * Check weather auto translation is enabled for content type
+ *
+ * @param string $contentType
+ * @return bool
+ */
+function _is_auto_transliterate_enabled_for_content_type(string $contentType): bool {
+  $ct_configs = \Drupal::config('transliterate.settings')->get('content_types') ?? [];
+  $ct_config = array_key_exists($contentType, $ct_configs) ? $ct_configs[$contentType] : [];
+  return array_key_exists('enabled', $ct_config) ? (bool)(int)$ct_config['enabled'] : false;
+}
+
+/**
+ * Checking whether nodes are in sync
+ *
+ * @param \Drupal\node\NodeInterface $node
+ * @return array
+ */
+function _auto_transliterate_check_nodes_sync(\Drupal\node\NodeInterface $node): array {
+  $result = [
+    'inSync' => true,
+    'message' => ''
+  ];
+  $langCode = $node->get('langcode')->value;
+  if($langCode == SR) {
+    $latNode = $node->hasTranslation(SR_LAT) ? $node->getTranslation(SR_LAT) : null;
+
+    if(!$latNode) {
+      $result = [
+        'inSync' => false,
+        'message' => t('This content does not exist in Latin. If you continue it will be automatically created by transliteration. Are you sure you want to do that?')
+      ];
+    } elseif($node->getChangedTime() != $latNode->getChangedTime()) {
+      $result = [
+        'inSync' => false,
+        'message' => t('Contents in Latin and Cyrillic are not in sync. If you continue, content in Latin will be overwritten by Cyrillic transliteration. Are you sure you want to do that?')
+      ];
+    }
+  }
+  elseif($langCode == SR_LAT) {
+    $result = [
+      'inSync' => false,
+      'message' => t('If you make changes in Latin they can be overwritten if changes are made in Cyrillic. Are you sure you want to do that?')
+    ];
+  }
+  return $result;
+}

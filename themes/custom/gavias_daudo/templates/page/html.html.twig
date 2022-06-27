@@ -25,7 +25,7 @@
 #}
 <!DOCTYPE html>
 <html{{ html_attributes }}>
-  <head> 
+  <head>
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token|raw }}">
@@ -60,24 +60,23 @@
       {{ 'Skip to main content'|t }}
     </a>
 
-    {% if preloader %} 
+    {% if preloader %}
       <div id="gva-preloader" >
         <div id="preloader-inner" class="cssload-container">
-          <div class="wait-text">{{ 'Please wait...'|t }} </div> 
           <div class="cssload-item cssload-moon"></div>
         </div>
       </div>
-    {% endif %}  
+    {% endif %}
 
     {{ page_top }}
     {{ page }}
     {{ page_bottom }}
     <js-bottom-placeholder token="{{ placeholder_token|raw }}">
-    
+
     {% if addon_template %}
       <div class="permission-save-{{ save_customize_permission }}">
          {% include addon_template %}
-      </div>  
+      </div>
     {% endif %}
     <div id="gva-overlay"></div>
   </body>

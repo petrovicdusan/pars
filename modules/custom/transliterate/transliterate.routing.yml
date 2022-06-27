@@ -1,0 +1,14 @@
+transliterate.settings:
+  path: '/admin/config/auto-transliteration'
+  defaults:
+    _form: '\Drupal\transliterate\Form\TransliterateSettingsForm'
+    _title: 'Auto transliterate settings'
+  requirements:
+    _permission: 'transliterate_configure_form'
+transliterate.translations:
+  path: '/admin/config/auto-transliteration/transliterate-translations'
+  defaults:
+    _form: '\Drupal\transliterate\Form\TransliterateTranslationsForm'
+    _title: 'Transliterate translations'
+  requirements:
+    _permission: 'transliterate_configure_form'

@@ -1,0 +1,7 @@
+name: Transliterate
+type: module
+description: 'Transliterate node for Drupal 8'
+package: 4Digits
+core: 8.x
+core_version_requirement: ^8 || ^9
+configure: transliterate.settings

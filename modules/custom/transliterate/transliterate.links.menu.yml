@@ -1,0 +1,10 @@
+transliterate.settings:
+  title: Transliterate settings
+  description: 'Auto transliterate module settings.'
+  route_name: transliterate.settings
+  parent: system.admin_config_regional
+transliterate.translations:
+  title: Transliterate translations
+  description: 'Auto transliterate cyrillic translations to latin.'
+  route_name: transliterate.translations
+  parent: transliterate.settings

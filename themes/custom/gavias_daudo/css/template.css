@@ -583,6 +583,8 @@ body.bg-dark .gva-body-page {
   font-family: "gilmer";
   position: relative;
   z-index: 11;
+  background: url(/public/images/header.jpg) no-repeat top center;
+  padding: 0;
 }
 
 .topbar ul {
@@ -643,7 +645,8 @@ header .site-branding-logo {
 }
 
 header .site-branding-logo img {
-  width: 100%;
+  width: auto;
+  max-width: initial;
 }
 
 @media (max-width: 767.98px) {
@@ -1206,12 +1209,12 @@ header.header-2 .gva-search-region {
 }
 
 #footer {
-  color: #b1bec5;
-  background: url("../images/bg-footer.png") no-repeat center bottom #2A2C38;
+  background: url("../images/bg-footer.png") no-repeat center bottom #0D305B;
+  color: #ffffff;
 }
 
 #footer a {
-  color: #b1bec5;
+  color: #ffffff;
 }
 
 #footer a:hover, #footer a:focus {
@@ -1219,7 +1222,7 @@ header.header-2 .gva-search-region {
 }
 
 #footer .footer-top {
-  background: #1F212C;
+  background: #0D305B;
   padding: 40px 0;
 }
 
@@ -17320,4 +17323,75 @@ body.path-services .body-page {
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+/***********************************  SIDE MENU ***********************************/
+.sidebar .navigation {
+  background: unset;
+  padding: 0;
+}
+.sidebar .navigation .gva_menu > li > a {
+  display: block;
+  position: relative;
+  color: #3b3e43;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 32px 5px;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  -ms-transition: all 0.35s;
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+@media (max-width: 1199px) {
+}
+.navigation .gva_menu > li {
+  display: inline-block;
+}
+
+
+.sidebar nav.block {
+  display: table;
+}
+.sidebar nav.block ul.gva_menu > li {
+  width: 100%;
+}
+.sidebar nav.block ul.gva_menu > li > a {
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: block;
+  width: 100%;
+}
+.sidebar nav.block ul.gva_menu .sub-menu {
+  border-top: none;
+  box-shadow: none;
+  display: block !important;
+  opacity: 1 !important;
+  position: static;
+  visibility: visible !important;
+  margin: -1px;
+  padding: 0;
+}
+.sidebar nav.block ul.gva_menu .sub-menu a {
+  padding-right: 0 !important;
+  color: #696969;
+  padding-left: 20px;
+}
+.sidebar .block-menu ul li a:after {
+  top: 10px;
+}
+.sidebar .navigation .gva_menu .sub-menu > li {
+  visibility: visible;
+}
+.sidebar .navigation .gva_menu .sub-menu {
+  transition: unset;
+  transform: unset;
+}
+.sidebar .navigation .gva_menu .sub-menu > li {
+  opacity: 1;
+  transition: unset;
+  transform: unset;
 }

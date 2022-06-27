@@ -1,0 +1,4 @@
+transliterate:
+  version: 1.x
+  js:
+    js/auto_transliterate_confirmation.js: {}
