@@ -21,3 +21,7 @@
 img.logo-site {
   display: block !important;
 }
+
+.node--view-mode-full .header-title {
+  margin-top: 40px;
+}
