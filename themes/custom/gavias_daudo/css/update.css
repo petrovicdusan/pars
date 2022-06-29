@@ -51,6 +51,6 @@ img.logo-site {
   padding-left: 3px;
 }
 .gbb-row .bb-inner {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
