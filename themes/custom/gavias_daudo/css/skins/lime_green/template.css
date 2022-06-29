@@ -132,7 +132,7 @@ ul.menu > li > a {
   -moz-transition: all 0.35s;
   -ms-transition: all 0.35s;
   position: relative;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 16px;
 }
 
@@ -150,7 +150,7 @@ ul.features-list > li {
   position: relative;
   list-style: none;
   margin-bottom: 10px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   color: #000;
   font-weight: 700;
   font-size: 16px;
@@ -219,7 +219,7 @@ a.disable {
   list-style-type: none;
   float: left;
   margin-right: 10px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 14px;
 }
 
@@ -376,7 +376,7 @@ a.disable {
 .breadcrumb-content-inner .gva-block-breadcrumb .breadcrumb-links nav.breadcrumb ol li {
   float: left;
   font-size: 14px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   color: #788592;
   font-weight: 500;
 }
@@ -580,7 +580,7 @@ body.bg-dark .gva-body-page {
   background: #2A2C38;
   padding: 12px 0;
   font-size: 14px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   position: relative;
   z-index: 11;
 }
@@ -706,7 +706,7 @@ header .header-info .content-inner .title {
   font-weight: 700;
   color: #000;
   line-height: 20px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 header .header-info .content-inner .desc {
@@ -1259,7 +1259,7 @@ header.header-2 .gva-search-region {
 #footer .copyright {
   font-size: 15px;
   font-weight: 500;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 #footer .copyright .copyright-inner {
@@ -1499,7 +1499,7 @@ body.maintenance-page {
   min-width: 120px;
   display: inline-block;
   color: #2A2C38;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .portfolio-single .post-content ul {
@@ -1743,7 +1743,7 @@ body.maintenance-page {
   margin: 25px 0 5px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .post-block .post-content .post-meta:before, .post-block .post-content .post-meta:after {
@@ -3599,7 +3599,7 @@ body.maintenance-page {
   line-height: 32px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .text-medium a {
@@ -3616,7 +3616,7 @@ body.maintenance-page {
   font-weight: 600;
   color: #2A2C38;
   margin-top: 2px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .text-size-big {
@@ -4262,7 +4262,7 @@ div.error {
   -ms-transition: all 0.35s;
   border: none;
   border-radius: 0;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   text-transform: none;
 }
 
@@ -4375,7 +4375,7 @@ div.error {
   -ms-transition: all 0.35s;
   font-weight: 700;
   padding-right: 28px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   text-transform: capitalize;
 }
 
@@ -4742,7 +4742,7 @@ div.error {
   font-size: 30px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .pricing-vertical .col-heading {
@@ -4753,7 +4753,7 @@ div.error {
 
 .pricing-vertical .col-heading ul li {
   height: 90px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 20px;
   line-height: 18px;
 }
@@ -5388,7 +5388,7 @@ form .form-item label {
   font-weight: 700;
   color: #000;
   margin-bottom: 0;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 #user-login-form .form-item input {
@@ -5671,7 +5671,7 @@ div.resizable-textarea textarea {
   font-size: 16px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .webform-submission-form .form-item input, .webform-submission-form .form-item textarea, .webform-submission-form .form-item select {
@@ -6359,7 +6359,7 @@ form .mailchimp-newsletter-mergefields .form-item textarea:hover, form .mailchim
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 16px;
 }
 
@@ -8012,7 +8012,7 @@ form .mailchimp-newsletter-mergefields .form-item textarea:hover, form .mailchim
     -ms-transition: all 0.35s;
     text-align: center;
     color: #768492;
-    font-family: "gilmer";
+    font-family: "Open Sans";
   }
 }
 
@@ -8146,7 +8146,7 @@ form .mailchimp-newsletter-mergefields .form-item textarea:hover, form .mailchim
     margin-bottom: 5px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     position: relative;
-    font-family: "gilmer";
+    font-family: "Open Sans";
   }
   .navigation .gva_menu .megamenu > .sub-menu > li > a:after, .navigation .gva_menu .gva-mega-menu > .sub-menu > li > a:after {
     display: none;
@@ -8201,7 +8201,7 @@ form .mailchimp-newsletter-mergefields .form-item textarea:hover, form .mailchim
     -moz-transition: all 0.2s ease-out;
     -ms-transition: all 0.2s ease-out;
     position: relative;
-    font-family: "gilmer";
+    font-family: "Open Sans";
     color: #788592;
   }
   .navigation .gva_menu .sub-menu > li > a:hover, .navigation .gva_menu .sub-menu > li > a:focus, .navigation .gva_menu .sub-menu > li > a:active {
@@ -8464,7 +8464,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   -ms-transition: all 0.35s;
   position: relative;
   font-weight: 500;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   color: #7f8284;
 }
 
@@ -8720,7 +8720,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   -ms-transition: all 0.35s;
   font-weight: 500;
   background: #fff;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .tags-list .item-list > ul > li a:hover, .tags-list .item-list > ul > li a:focus, .tags-list .item-list > ul > li a:active {
@@ -9487,7 +9487,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 
 .widget.gsc-progress .progress-label {
   font-size: 18px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .widget.gsc-progress .percentage {
@@ -10392,7 +10392,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 }
 
 .gsc-icon-box.left-2 .highlight_content .desc {
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 16px;
 }
 

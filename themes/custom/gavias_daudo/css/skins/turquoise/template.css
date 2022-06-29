@@ -132,7 +132,7 @@ ul.menu > li > a {
   -moz-transition: all 0.35s;
   -ms-transition: all 0.35s;
   position: relative;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 16px;
 }
 
@@ -150,7 +150,7 @@ ul.features-list > li {
   position: relative;
   list-style: none;
   margin-bottom: 10px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   color: #000;
   font-weight: 700;
   font-size: 16px;
@@ -219,7 +219,7 @@ a.disable {
   list-style-type: none;
   float: left;
   margin-right: 10px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 14px;
 }
 
@@ -376,7 +376,7 @@ a.disable {
 .breadcrumb-content-inner .gva-block-breadcrumb .breadcrumb-links nav.breadcrumb ol li {
   float: left;
   font-size: 14px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   color: #788592;
   font-weight: 500;
 }
@@ -580,7 +580,7 @@ body.bg-dark .gva-body-page {
   background: #2A2C38;
   padding: 12px 0;
   font-size: 14px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   position: relative;
   z-index: 11;
 }
@@ -706,7 +706,7 @@ header .header-info .content-inner .title {
   font-weight: 700;
   color: #000;
   line-height: 20px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 header .header-info .content-inner .desc {
@@ -1259,7 +1259,7 @@ header.header-2 .gva-search-region {
 #footer .copyright {
   font-size: 15px;
   font-weight: 500;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 #footer .copyright .copyright-inner {
@@ -1499,7 +1499,7 @@ body.maintenance-page {
   min-width: 120px;
   display: inline-block;
   color: #2A2C38;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .portfolio-single .post-content ul {
@@ -1743,7 +1743,7 @@ body.maintenance-page {
   margin: 25px 0 5px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .post-block .post-content .post-meta:before, .post-block .post-content .post-meta:after {
@@ -3599,7 +3599,7 @@ body.maintenance-page {
   line-height: 32px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .text-medium a {
@@ -3616,7 +3616,7 @@ body.maintenance-page {
   font-weight: 600;
   color: #2A2C38;
   margin-top: 2px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .text-size-big {
@@ -4262,7 +4262,7 @@ div.error {
   -ms-transition: all 0.35s;
   border: none;
   border-radius: 0;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   text-transform: none;
 }
 
@@ -4375,7 +4375,7 @@ div.error {
   -ms-transition: all 0.35s;
   font-weight: 700;
   padding-right: 28px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   text-transform: capitalize;
 }
 
@@ -4742,7 +4742,7 @@ div.error {
   font-size: 30px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .pricing-vertical .col-heading {
@@ -4753,7 +4753,7 @@ div.error {
 
 .pricing-vertical .col-heading ul li {
   height: 90px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 20px;
   line-height: 18px;
 }
@@ -5388,7 +5388,7 @@ form .form-item label {
   font-weight: 700;
   color: #000;
   margin-bottom: 0;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 #user-login-form .form-item input {
@@ -5671,7 +5671,7 @@ div.resizable-textarea textarea {
   font-size: 16px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .webform-submission-form .form-item input, .webform-submission-form .form-item textarea, .webform-submission-form .form-item select {

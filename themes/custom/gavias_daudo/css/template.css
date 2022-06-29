@@ -132,7 +132,7 @@ ul.menu > li > a {
   -moz-transition: all 0.35s;
   -ms-transition: all 0.35s;
   position: relative;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 16px;
 }
 
@@ -150,7 +150,7 @@ ul.features-list > li {
   position: relative;
   list-style: none;
   margin-bottom: 10px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   color: #000;
   font-weight: 700;
   font-size: 16px;
@@ -219,7 +219,7 @@ a.disable {
   list-style-type: none;
   float: left;
   margin-right: 10px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 14px;
 }
 
@@ -376,7 +376,7 @@ a.disable {
 .breadcrumb-content-inner .gva-block-breadcrumb .breadcrumb-links nav.breadcrumb ol li {
   float: left;
   font-size: 14px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   color: #788592;
   font-weight: 500;
 }
@@ -537,6 +537,77 @@ pre {
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Open Sans";
+  src: url(../fonts/open-sans/Light/OpenSans-Light.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/Light/OpenSans-Light.woff?v=1.101) format("woff");
+  font-weight: 300;
+  font-style: normal
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(../fonts/open-sans/LightItalic/OpenSans-LightItalic.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/LightItalic/OpenSans-LightItalic.woff?v=1.101) format("woff");
+  font-weight: 300;
+  font-style: italic
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(../fonts/open-sans/Regular/OpenSans-Regular.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/Regular/OpenSans-Regular.woff?v=1.101) format("woff");
+  font-weight: 400;
+  font-style: normal
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(../fonts/open-sans/Italic/OpenSans-Italic.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/Italic/OpenSans-Italic.woff?v=1.101) format("woff");
+  font-weight: 400;
+  font-style: italic
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(../fonts/open-sans/Semibold/OpenSans-Semibold.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/Semibold/OpenSans-Semibold.woff?v=1.101) format("woff");
+  font-weight: 600;
+  font-style: normal
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(../fonts/open-sans/SemiboldItalic/OpenSans-SemiboldItalic.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/SemiboldItalic/OpenSans-SemiboldItalic.woff?v=1.101) format("woff");
+  font-weight: 600;
+  font-style: italic
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(../fonts/open-sans/Bold/OpenSans-Bold.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/Bold/OpenSans-Bold.woff?v=1.101) format("woff");
+  font-weight: 700;
+  font-style: normal
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(../fonts/open-sans/BoldItalic/OpenSans-BoldItalic.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/BoldItalic/OpenSans-BoldItalic.woff?v=1.101) format("woff");
+  font-weight: 700;
+  font-style: italic
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(../fonts/open-sans/ExtraBold/OpenSans-ExtraBold.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/ExtraBold/OpenSans-ExtraBold.woff?v=1.101) format("woff");
+  font-weight: 800;
+  font-style: normal
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(../fonts/open-sans/ExtraBoldItalic/OpenSans-ExtraBoldItalic.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/ExtraBoldItalic/OpenSans-ExtraBoldItalic.woff?v=1.101) format("woff");
+  font-weight: 800;
+  font-style: italic
+}
+
+
 html {
   overflow-x: hidden !important;
   font-size: 18px;
@@ -545,6 +616,7 @@ html {
 body {
   overflow: hidden !important;
   position: relative;
+  font-family: "Open Sans" !important;
 }
 
 body.boxed {
@@ -580,7 +652,7 @@ body.bg-dark .gva-body-page {
   background: #2A2C38;
   padding: 12px 0;
   font-size: 14px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   position: relative;
   z-index: 11;
   background: url(/public/images/header.jpg) no-repeat top center;
@@ -709,7 +781,7 @@ header .header-info .content-inner .title {
   font-weight: 700;
   color: #000;
   line-height: 20px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 header .header-info .content-inner .desc {
@@ -1262,7 +1334,7 @@ header.header-2 .gva-search-region {
 #footer .copyright {
   font-size: 15px;
   font-weight: 500;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 #footer .copyright .copyright-inner {
@@ -1502,7 +1574,7 @@ body.maintenance-page {
   min-width: 120px;
   display: inline-block;
   color: #2A2C38;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .portfolio-single .post-content ul {
@@ -1746,7 +1818,7 @@ body.maintenance-page {
   margin: 25px 0 5px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .post-block .post-content .post-meta:before, .post-block .post-content .post-meta:after {
@@ -3602,7 +3674,7 @@ body.maintenance-page {
   line-height: 32px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .text-medium a {
@@ -3619,7 +3691,7 @@ body.maintenance-page {
   font-weight: 600;
   color: #2A2C38;
   margin-top: 2px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .text-size-big {
@@ -4265,7 +4337,7 @@ div.error {
   -ms-transition: all 0.35s;
   border: none;
   border-radius: 0;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   text-transform: none;
 }
 
@@ -4378,7 +4450,7 @@ div.error {
   -ms-transition: all 0.35s;
   font-weight: 700;
   padding-right: 28px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   text-transform: capitalize;
 }
 
@@ -4745,7 +4817,7 @@ div.error {
   font-size: 30px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .pricing-vertical .col-heading {
@@ -4756,7 +4828,7 @@ div.error {
 
 .pricing-vertical .col-heading ul li {
   height: 90px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 20px;
   line-height: 18px;
 }
@@ -5391,7 +5463,7 @@ form .form-item label {
   font-weight: 700;
   color: #000;
   margin-bottom: 0;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 #user-login-form .form-item input {
@@ -5674,7 +5746,7 @@ div.resizable-textarea textarea {
   font-size: 16px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .webform-submission-form .form-item input, .webform-submission-form .form-item textarea, .webform-submission-form .form-item select {
@@ -6362,7 +6434,7 @@ form .mailchimp-newsletter-mergefields .form-item textarea:hover, form .mailchim
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 16px;
 }
 
@@ -8015,7 +8087,7 @@ form .mailchimp-newsletter-mergefields .form-item textarea:hover, form .mailchim
     -ms-transition: all 0.35s;
     text-align: center;
     color: #768492;
-    font-family: "gilmer";
+    font-family: "Open Sans";
   }
 }
 
@@ -8149,7 +8221,7 @@ form .mailchimp-newsletter-mergefields .form-item textarea:hover, form .mailchim
     margin-bottom: 5px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     position: relative;
-    font-family: "gilmer";
+    font-family: "Open Sans";
   }
   .navigation .gva_menu .megamenu > .sub-menu > li > a:after, .navigation .gva_menu .gva-mega-menu > .sub-menu > li > a:after {
     display: none;
@@ -8204,7 +8276,7 @@ form .mailchimp-newsletter-mergefields .form-item textarea:hover, form .mailchim
     -moz-transition: all 0.2s ease-out;
     -ms-transition: all 0.2s ease-out;
     position: relative;
-    font-family: "gilmer";
+    font-family: "Open Sans";
     color: #788592;
   }
   .navigation .gva_menu .sub-menu > li > a:hover, .navigation .gva_menu .sub-menu > li > a:focus, .navigation .gva_menu .sub-menu > li > a:active {
@@ -8467,7 +8539,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   -ms-transition: all 0.35s;
   position: relative;
   font-weight: 500;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   color: #7f8284;
 }
 
@@ -8723,7 +8795,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   -ms-transition: all 0.35s;
   font-weight: 500;
   background: #fff;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .tags-list .item-list > ul > li a:hover, .tags-list .item-list > ul > li a:focus, .tags-list .item-list > ul > li a:active {
@@ -9490,7 +9562,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 
 .widget.gsc-progress .progress-label {
   font-size: 18px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .widget.gsc-progress .percentage {
@@ -10395,7 +10467,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 }
 
 .gsc-icon-box.left-2 .highlight_content .desc {
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-size: 16px;
 }
 
@@ -10768,7 +10840,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 
 .gsc-icon-box-new.style-1 .content-inner .title {
   color: #2A2C38;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-weight: 600;
   font-size: 18px;
   line-height: 1.2;
@@ -10876,7 +10948,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   margin-top: 13px;
   color: #3B7EFF;
   display: inline-block;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .gsc-icon-box-new.style-2 .content-inner .desc .link:hover {
@@ -10912,7 +10984,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   padding-left: 50px;
   text-transform: uppercase;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-weight: 500;
   font-size: 12px;
   letter-spacing: 1px;
@@ -10975,7 +11047,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   text-transform: uppercase;
   color: #000;
   letter-spacing: 2px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-weight: 500;
   font-size: 12px;
 }
@@ -11250,7 +11322,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   letter-spacing: -0.26px;
   line-height: 1;
   color: #3B7EFF;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-weight: 700;
 }
 
@@ -11363,7 +11435,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .gsc-images-parallax.style-v1 .content-box .icon {
@@ -11884,7 +11956,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   padding: 0 0 15px;
   position: relative;
   margin: 0;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 @media (max-width: 991.98px) {
@@ -12058,7 +12130,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 .gsc-team.team-vertical .team-name {
   padding: 0;
   color: #fff;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .gsc-team.team-vertical .team-position {
@@ -12194,7 +12266,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 .gsc-team.team-circle .team-name {
   padding: 0;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .gsc-team.team-circle .team-position {
@@ -12288,7 +12360,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   margin-bottom: 15px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 @media (max-width: 767.98px) {
@@ -12623,7 +12695,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 .gsc-text-rotate .rotate-text .primary-text {
   font-size: 42px;
   color: #2A2C38;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   letter-spacing: -1px;
   font-weight: 700;
   line-height: 1.2;
@@ -12712,7 +12784,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   font-weight: 700;
   letter-spacing: 2px;
   margin-bottom: 5px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 @media (max-width: 991.98px) {
@@ -13049,7 +13121,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   line-height: 36px;
   font-size: 20px;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .gsc-quote-text.has-border {
@@ -13328,7 +13400,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 .gsc-our-partners .content-inner .info {
   font-size: 13px;
   padding: 5px 0 12px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .gsc-our-partners .content-inner .info .category {
@@ -13534,7 +13606,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 
 .gsc-service-carousel .item .content-inner .desc {
   font-size: 12px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   color: #000;
   position: relative;
   padding-top: 15px;
@@ -13788,7 +13860,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
 
 .gsc-progress-box .heading-box {
   line-height: 1;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .gsc-progress-box .heading-box .step-number {
@@ -14029,7 +14101,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   font-size: 22px;
   font-weight: 700;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   margin-bottom: 15px;
   padding-bottom: 15px;
   position: relative;
@@ -14389,7 +14461,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
     padding: 0 !important;
     font-weight: 700;
     color: #000 !important;
-    font-family: "gilmer";
+    font-family: "Open Sans";
   }
   .gva-offcanvas-mobile .gva-navigation .gva_menu > li > a:after, .gva-offcanvas-mobile .gva-navigation .gva_menu > li > a:before {
     content: none;
@@ -14945,7 +15017,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   border: 1px solid #dee2e6;
   font-size: 12px;
   background: #fff;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   letter-spacing: 1px;
   display: inline-block;
   margin-bottom: 10px;
@@ -15830,7 +15902,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   line-height: 38px;
   position: relative;
   color: #2A2C38;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   text-align: center;
   margin: 0 auto;
 }
@@ -15923,7 +15995,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   padding-bottom: 25px;
   color: #000;
   text-align: center;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 @media (max-width: 991.98px) {
@@ -15941,13 +16013,13 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   font-size: 20px;
   font-weight: 700;
   color: #2A2C38;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .testimonial-node-2 .content-body .info .job {
   font-size: 16px;
   line-height: 1;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .testimonial-node-3 {
@@ -16057,7 +16129,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   position: relative;
   padding-top: 10px;
   color: #fff;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 @media (max-width: 1199.98px) {
@@ -16112,7 +16184,7 @@ ul[data-drupal-views-infinite-scroll-pager].pager {
   font-size: 18px;
   display: block;
   line-height: 1.1;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 .testimonial-node-v3 .content-inner .right .job {
@@ -16904,7 +16976,7 @@ body.path-services .body-page {
   padding: 10px !important;
   font-weight: 600;
   color: #000;
-  font-family: "gilmer";
+  font-family: "Open Sans";
 }
 
 #customize-gavias-preivew .card .card-header a:after {
@@ -17110,20 +17182,20 @@ body.path-services .body-page {
 }
 
 .gavias_sliderlayer .slide-style-1, #gavias_slider_single .slide-style-1 {
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-weight: 700;
   letter-spacing: -0.5px;
 }
 
 .gavias_sliderlayer .slide-style-2, #gavias_slider_single .slide-style-2 {
-  font-family: "gilmer";
+  font-family: "Open Sans";
   font-weight: 400;
 }
 
 .gavias_sliderlayer .slide-style-3, #gavias_slider_single .slide-style-3 {
   font-weight: 500;
   letter-spacing: 3px;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   border-bottom: 2px solid #3B7EFF;
 }
 
@@ -17222,7 +17294,7 @@ body.path-services .body-page {
   -moz-transition: all 0.35s;
   -ms-transition: all 0.35s;
   border: none;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   text-transform: none;
 }
 
@@ -17284,7 +17356,7 @@ body.path-services .body-page {
   z-index: 1;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  font-family: "gilmer";
+  font-family: "Open Sans";
   border: none;
 }
 
