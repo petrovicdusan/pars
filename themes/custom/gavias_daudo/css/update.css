@@ -24,6 +24,7 @@ img.logo-site {
 
 .node--view-mode-full .header-title {
   margin-top: 40px;
+  margin-bottom: 30px;
 }
 
 .node--view-mode-full .node__content h1,
@@ -39,4 +40,7 @@ img.logo-site {
 }
 .node--view-mode-full .node__content ul li {
   padding-left: 3px;
+}
+.gbb-row .bb-inner {
+  padding: 0;
 }
