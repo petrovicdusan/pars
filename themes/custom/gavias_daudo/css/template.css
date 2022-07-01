@@ -567,20 +567,6 @@ pre {
 
 @font-face {
   font-family: "Open Sans";
-  src: url(../fonts/open-sans/Semibold/OpenSans-Semibold.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/Semibold/OpenSans-Semibold.woff?v=1.101) format("woff");
-  font-weight: 600;
-  font-style: normal
-}
-
-@font-face {
-  font-family: "Open Sans";
-  src: url(../fonts/open-sans/SemiboldItalic/OpenSans-SemiboldItalic.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/SemiboldItalic/OpenSans-SemiboldItalic.woff?v=1.101) format("woff");
-  font-weight: 600;
-  font-style: italic
-}
-
-@font-face {
-  font-family: "Open Sans";
   src: url(../fonts/open-sans/Bold/OpenSans-Bold.woff2?v=1.101) format("woff2"), url(../fonts/open-sans/Bold/OpenSans-Bold.woff?v=1.101) format("woff");
   font-weight: 700;
   font-style: normal
@@ -650,13 +636,12 @@ body.bg-dark .gva-body-page {
 
 .topbar {
   background: #2A2C38;
-  padding: 12px 0;
+  padding: 15px 0;
   font-size: 14px;
   font-family: "Open Sans";
   position: relative;
   z-index: 11;
   background: url(/public/images/header.jpg) no-repeat top center;
-  padding: 0;
 }
 
 .topbar ul {
@@ -1008,7 +993,7 @@ header.header-default .header-main-inner .branding {
 }
 
 header.header-default .header-main-inner .header-inner {
-  padding-left: 210px;
+  padding-left: 0 !important;
   padding-right: 75px;
 }
 
@@ -8080,7 +8065,7 @@ form .mailchimp-newsletter-mergefields .form-item textarea:hover, form .mailchim
     position: relative;
     font-size: 16px;
     font-weight: 700;
-    padding: 35px 20px;
+    padding: 35px 8px;
     -webkit-transition: all 0.35s;
     transition: all 0.35s;
     -moz-transition: all 0.35s;

@@ -50,6 +50,7 @@ function transliterate_node_insert(Drupal\node\NodeInterface $node) {
     if ($langCode == SR) {
       $isChanged = false;
       $translations = [];
+      $translationsEn = [];
       $nodeTransFields = $node->getTranslatableFields();
       foreach (array_intersect(array_keys($nodeTransFields), $ctConfigFields) as $fieldName) {
         if ($node->hasField($fieldName)) {
@@ -58,35 +59,47 @@ function transliterate_node_insert(Drupal\node\NodeInterface $node) {
           $fieldValue = $field->getValue();
 
           $translatedValue = $fieldValue;
+          $translatedEnValue = $fieldValue;
           if (is_string($fieldValue)) {
             $translatedValue = Transliterator::cyr2lat($fieldValue);
+            $translatedEnValue = Transliterator::cyr2en($fieldValue);
           } elseif (is_array($fieldValue) && count($fieldValue) > 0) {
             foreach ($fieldValue as $key => $value) {
               if (isset($fieldValue[0]['value'])) {
                 $translatedValue[$key]['value'] = is_string($translatedValue[$key]['value']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['value']) : $translatedValue[$key]['value'];
+                $translatedEnValue[$key]['value'] = is_string($translatedEnValue[$key]['value']) ?
+                  Transliterator::cyr2en($translatedValue[$key]['value']) : $translatedEnValue[$key]['value'];
               }
               if (isset($fieldValue[0]['description'])) {
                 $translatedValue[$key]['description'] = is_string($translatedValue[$key]['description']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['description']) : $translatedValue[$key]['description'];
+                $translatedEnValue[$key]['description'] = is_string($translatedEnValue[$key]['description']) ?
+                  Transliterator::cyr2en($translatedEnValue[$key]['description']) : $translatedEnValue[$key]['description'];
               }
               if (isset($fieldValue[0]['title'])) {
                 $translatedValue[$key]['title'] = is_string($translatedValue[$key]['title']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['title']) : $translatedValue[$key]['description'];
+                $translatedEnValue[$key]['title'] = is_string($translatedEnValue[$key]['title']) ?
+                  Transliterator::cyr2en($translatedEnValue[$key]['title']) : $translatedEnValue[$key]['description'];
               }
               if (isset($fieldValue[0]['alt'])) {
                 $translatedValue[$key]['alt'] = is_string($translatedValue[$key]['alt']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['alt']) : $translatedValue[$key]['alt'];
+                $translatedEnValue[$key]['alt'] = is_string($translatedEnValue[$key]['alt']) ?
+                  Transliterator::cyr2en($translatedEnValue[$key]['alt']) : $translatedEnValue[$key]['alt'];
               }
             }
           }
 
           $translations[$fieldName] = $translatedValue;
+          $translationsEn[$fieldName] = $translatedValue;
         }
       }
       if ($isChanged) {
         try {
           $node->addTranslation(SR_LAT, $translations)->save();
+          $node->addTranslation('en', $translationsEn)->save();
         } catch (Exception $e) {
           $a = 1;
         }
@@ -108,6 +121,7 @@ function transliterate_node_presave(Drupal\node\NodeInterface $node) {
     $langCode = $node->get('langcode')->value;
     if ($langCode == SR) {
       $latNode = _node_has_translation($node, SR_LAT) ? $node->getTranslation(SR_LAT) : $node->addTranslation(SR_LAT);
+      $enNode = _node_has_translation($node, 'en') ? $node->getTranslation('en') : $node->addTranslation('en');
       $nodeTransFields = $latNode->getTranslatableFields();
       foreach (array_intersect(array_keys($nodeTransFields), $ctConfigFields) as $fieldName) {
         if ($latNode->hasField($fieldName)) {
@@ -115,33 +129,45 @@ function transliterate_node_presave(Drupal\node\NodeInterface $node) {
           $fieldValue = $field->getValue();
 
           $translatedValue = $fieldValue;
+          $translatedEnValue = $fieldValue;
           if (is_string($fieldValue)) {
             $translatedValue = Transliterator::cyr2lat($fieldValue);
+            $translatedEnValue = Transliterator::cyr2en($fieldValue);
           } elseif (is_array($fieldValue) && count($fieldValue) > 0) {
             foreach ($fieldValue as $key => $value) {
               if (isset($fieldValue[0]['value'])) {
                 $translatedValue[$key]['value'] = is_string($translatedValue[$key]['value']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['value']) : $translatedValue[$key]['value'];
+                $translatedEnValue[$key]['value'] = is_string($translatedValue[$key]['value']) ?
+                  Transliterator::cyr2en($translatedEnValue[$key]['value']) : $translatedEnValue[$key]['value'];
               }
               if (isset($fieldValue[0]['description'])) {
                 $translatedValue[$key]['description'] = is_string($translatedValue[$key]['description']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['description']) : $translatedValue[$key]['description'];
+                $translatedEnValue[$key]['description'] = is_string($translatedEnValue[$key]['description']) ?
+                  Transliterator::cyr2en($translatedEnValue[$key]['description']) : $translatedEnValue[$key]['description'];
               }
               if (isset($fieldValue[0]['title'])) {
                 $translatedValue[$key]['title'] = is_string($translatedValue[$key]['title']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['title']) : $translatedValue[$key]['description'];
+                $translatedEnValue[$key]['title'] = is_string($translatedEnValue[$key]['title']) ?
+                  Transliterator::cyr2en($translatedEnValue[$key]['title']) : $translatedEnValue[$key]['description'];
               }
               if (isset($fieldValue[0]['alt'])) {
                 $translatedValue[$key]['alt'] = is_string($translatedValue[$key]['alt']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['alt']) : $translatedValue[$key]['alt'];
+                $translatedEnValue[$key]['alt'] = is_string($translatedEnValue[$key]['alt']) ?
+                  Transliterator::cyr2en($translatedEnValue[$key]['alt']) : $translatedEnValue[$key]['alt'];
               }
             }
           }
 
           $latNode->{$fieldName} = $translatedValue;
+          $enNode->{$fieldName} = $translatedEnValue;
         }
       }
       $latNode->setNewRevision(true);
+      $enNode->setNewRevision(true);
     }
   }
 }

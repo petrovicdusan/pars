@@ -36,6 +36,9 @@ img.logo-site {
 .node--view-mode-full .node__content {
   margin-bottom: 30px;
 }
+.frontpage .node--view-mode-full .node__content {
+  margin-bottom: 0;
+}
 .node--view-mode-full .node__content h1,
 .node--view-mode-full .node__content h2 {
   margin: 25px 0;

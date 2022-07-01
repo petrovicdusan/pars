@@ -1,0 +1,8 @@
+pars.calendar_navigation:
+  path: '/calendar-navigation'
+  defaults:
+    _controller: 'Drupal\pars\Bundle\Calendar\CalendarNavigationController::run'
+    _title: ''
+  requirements:
+    _permission: 'access content'
+

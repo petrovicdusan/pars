@@ -1,0 +1,6 @@
+name: Pars
+type: module
+description: 'Pars module Drupal 8'
+package: 4Digits
+core: 8.x
+core_version_requirement: ^8 || ^9

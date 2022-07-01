@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\transliterate\Plugin\Transliterator;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class Transliterator {
 
@@ -23,6 +24,16 @@ class Transliterator {
     "О" => "O", "П" => "P", "Р" => "R", "С" => "S", "Т" => "T", "Ћ" => "Ć",
     "У" => "U", "Ф" => "F", "Х" => "H", "Ц" => "C", "Ч" => "Č", "Ш" => "Š",
   );
+
+  /**
+   * Tranliterate cyrilic (html) text to en equivalent. Simple strtr().
+   *
+   * @param $str
+   * @return string
+   */
+  public static function cyr2en($str) {
+    return GoogleTranslate::trans($str, 'en', 'sr');
+  }
 
   /**
    * Tranliterate cyrilic (html) text to latin equivalent. Simple strtr().

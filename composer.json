@@ -27,7 +27,8 @@
         "drupal/menu_block": "^1.8",
         "drupal/module_filter": "^3.2",
         "drupal/pathauto": "^1.10",
-        "drupal/webform": "^6.1"
+        "drupal/webform": "^6.1",
+        "stichoza/google-translate-php": "^4.1"
     },
     "conflict": {
         "drupal/drupal": "*"

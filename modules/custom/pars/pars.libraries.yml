@@ -1,0 +1,6 @@
+calendar:
+  js:
+    assets/lib/calendar/js/pars_calendar.js: {}
+  css:
+    theme:
+      assets/lib/calendar/css/pars_calendar.css: {}
