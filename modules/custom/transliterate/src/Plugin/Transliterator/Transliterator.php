@@ -32,7 +32,29 @@ class Transliterator {
    * @return string
    */
   public static function cyr2en($str) {
-    return GoogleTranslate::trans($str, 'en', 'sr');
+    if (empty($str)) return '';
+
+    $splitted = preg_split('~(<[^>]+>|\&[a-z]+;|\&0x[0-9a-f]+;|\&\#[0-9]+;)~sSi', $str, -1, PREG_SPLIT_DELIM_CAPTURE);
+    $pattern = join('', array_keys(self::$cyr2lat_trans_table_ucase));
+    $pattern_nonchar = join('', array_keys(self::$cyr2lat_trans_table));
+    // parni su sadrzaj, neparni su delimiteri
+    for ($i = 0, $l = count($splitted), $out = ''; $i < $l; $i++) {
+      if ($i % 2) {
+        $out .= preg_replace_callback('~(\s(title|alt))="([^"]+)"~', function ($matches) {
+          return self::cyr2en($matches[0]);
+        }, $splitted[$i]);
+      } else {
+        $splitted[$i] = preg_replace_callback(
+          "~(^|[^$pattern_nonchar])([$pattern]+)(?=($|[^$pattern_nonchar]))~u",
+          function ($matches) {
+            return GoogleTranslate::trans($matches[0], 'en', 'sr');
+          },
+          $splitted[$i]
+        );
+        $out .= GoogleTranslate::trans($splitted[$i], 'en', 'sr');
+      }
+    }
+    return $out;
   }
 
   /**
