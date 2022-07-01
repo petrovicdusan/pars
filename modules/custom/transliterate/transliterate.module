@@ -93,7 +93,7 @@ function transliterate_node_insert(Drupal\node\NodeInterface $node) {
           }
 
           $translations[$fieldName] = $translatedValue;
-          $translationsEn[$fieldName] = $translatedValue;
+          $translationsEn[$fieldName] = $translatedEnValue;
         }
       }
       if ($isChanged) {

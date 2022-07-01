@@ -47,11 +47,23 @@ class Transliterator {
         $splitted[$i] = preg_replace_callback(
           "~(^|[^$pattern_nonchar])([$pattern]+)(?=($|[^$pattern_nonchar]))~u",
           function ($matches) {
-            return GoogleTranslate::trans($matches[0], 'en', 'sr');
+            $match = $matches[0];
+            $trans = $match;
+            if (!empty($match)) {
+              $gTrans = GoogleTranslate::trans($match, 'en', 'sr');
+              $trans = $match[0] == " " ? " " . $gTrans : $gTrans;
+            }
+            return $trans;
           },
           $splitted[$i]
         );
-        $out .= GoogleTranslate::trans($splitted[$i], 'en', 'sr');
+        $match = $splitted[$i];
+        $trans = $match;
+        if (!empty($match)) {
+          $gTrans = GoogleTranslate::trans($match, 'en', 'sr');
+          $trans = $match[0] == " " ? " " . $gTrans : $gTrans;
+        }
+        $out .= $trans;
       }
     }
     return $out;
