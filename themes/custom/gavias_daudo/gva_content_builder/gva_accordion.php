@@ -100,12 +100,12 @@ if(!class_exists('element_gva_accordion')):
                      <div class="panel panel-default">
                         <div class="panel-heading">
                            <h4 class="panel-title">
-                             <a role="button" data-toggle="collapse" class="<?php print ($i == 1) ? '' : 'collapsed' ?>" href="#<?php print ($_id . '-' . $i) ?>">
+                             <a role="button" data-toggle="collapse" class="<?php print ($i == 1 && false) ? '' : 'collapsed' ?>" href="#<?php print ($_id . '-' . $i) ?>">
                                <?php print $$title ?>
                              </a>
                            </h4>
                         </div>
-                        <div id="<?php print ($_id . '-' . $i) ?>" class="panel-collapse collapse<?php if($i==1) print ' in show' ?>" data-parent="#<?php print $_id; ?>">
+                        <div id="<?php print ($_id . '-' . $i) ?>" class="panel-collapse collapse<?php if($i==1 && false) print ' in show' ?>" data-parent="#<?php print $_id; ?>">
                            <div class="panel-body">
                               <?php print $$content ?>
                            </div>
