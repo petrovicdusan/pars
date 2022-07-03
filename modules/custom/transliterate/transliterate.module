@@ -43,6 +43,7 @@ function transliterate_cron() {
 function transliterate_node_insert(Drupal\node\NodeInterface $node) {
   $contentType = $node->getType();
   if(_is_auto_transliterate_enabled_for_content_type($contentType)) {
+    $googleTranslateEnabled = _is_google_auto_translate_enabled_for_content_type($contentType);
     $ctConfigs = \Drupal::config('transliterate.settings')->get('content_types') ?? [];
     $ctConfig = array_key_exists($contentType, $ctConfigs) ? $ctConfigs[$contentType] : [];
     $ctConfigFields = array_key_exists('fields', $ctConfig) ? $ctConfig['fields'] : [];
@@ -62,32 +63,42 @@ function transliterate_node_insert(Drupal\node\NodeInterface $node) {
           $translatedEnValue = $fieldValue;
           if (is_string($fieldValue)) {
             $translatedValue = Transliterator::cyr2lat($fieldValue);
-            $translatedEnValue = Transliterator::cyr2en($fieldValue);
+            if ($googleTranslateEnabled) {
+              $translatedEnValue = Transliterator::cyr2en($fieldValue);
+            }
           } elseif (is_array($fieldValue) && count($fieldValue) > 0) {
             foreach ($fieldValue as $key => $value) {
               if (isset($fieldValue[0]['value'])) {
                 $translatedValue[$key]['value'] = is_string($translatedValue[$key]['value']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['value']) : $translatedValue[$key]['value'];
-                $translatedEnValue[$key]['value'] = is_string($translatedEnValue[$key]['value']) ?
-                  Transliterator::cyr2en($translatedValue[$key]['value']) : $translatedEnValue[$key]['value'];
+                if ($googleTranslateEnabled) {
+                  $translatedEnValue[$key]['value'] = is_string($translatedEnValue[$key]['value']) ?
+                    Transliterator::cyr2en($translatedValue[$key]['value']) : $translatedEnValue[$key]['value'];
+                }
               }
               if (isset($fieldValue[0]['description'])) {
                 $translatedValue[$key]['description'] = is_string($translatedValue[$key]['description']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['description']) : $translatedValue[$key]['description'];
-                $translatedEnValue[$key]['description'] = is_string($translatedEnValue[$key]['description']) ?
-                  Transliterator::cyr2en($translatedEnValue[$key]['description']) : $translatedEnValue[$key]['description'];
+                if ($googleTranslateEnabled) {
+                  $translatedEnValue[$key]['description'] = is_string($translatedEnValue[$key]['description']) ?
+                    Transliterator::cyr2en($translatedEnValue[$key]['description']) : $translatedEnValue[$key]['description'];
+                }
               }
               if (isset($fieldValue[0]['title'])) {
                 $translatedValue[$key]['title'] = is_string($translatedValue[$key]['title']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['title']) : $translatedValue[$key]['description'];
-                $translatedEnValue[$key]['title'] = is_string($translatedEnValue[$key]['title']) ?
-                  Transliterator::cyr2en($translatedEnValue[$key]['title']) : $translatedEnValue[$key]['description'];
+                if ($googleTranslateEnabled) {
+                  $translatedEnValue[$key]['title'] = is_string($translatedEnValue[$key]['title']) ?
+                    Transliterator::cyr2en($translatedEnValue[$key]['title']) : $translatedEnValue[$key]['description'];
+                }
               }
               if (isset($fieldValue[0]['alt'])) {
                 $translatedValue[$key]['alt'] = is_string($translatedValue[$key]['alt']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['alt']) : $translatedValue[$key]['alt'];
-                $translatedEnValue[$key]['alt'] = is_string($translatedEnValue[$key]['alt']) ?
-                  Transliterator::cyr2en($translatedEnValue[$key]['alt']) : $translatedEnValue[$key]['alt'];
+                if ($googleTranslateEnabled) {
+                  $translatedEnValue[$key]['alt'] = is_string($translatedEnValue[$key]['alt']) ?
+                    Transliterator::cyr2en($translatedEnValue[$key]['alt']) : $translatedEnValue[$key]['alt'];
+                }
               }
             }
           }
@@ -99,7 +110,9 @@ function transliterate_node_insert(Drupal\node\NodeInterface $node) {
       if ($isChanged) {
         try {
           $node->addTranslation(SR_LAT, $translations)->save();
-          $node->addTranslation('en', $translationsEn)->save();
+          if ($googleTranslateEnabled) {
+            $node->addTranslation('en', $translationsEn)->save();
+          }
         } catch (Exception $e) {
           $a = 1;
         }
@@ -115,6 +128,7 @@ function transliterate_node_insert(Drupal\node\NodeInterface $node) {
 function transliterate_node_presave(Drupal\node\NodeInterface $node) {
   $contentType = $node->getType();
   if(!$node->isNew() && _is_auto_transliterate_enabled_for_content_type($contentType)) {
+    $googleTranslateEnabled = _is_google_auto_translate_enabled_for_content_type($contentType);
     $ctConfigs = \Drupal::config('transliterate.settings')->get('content_types') ?? [];
     $ctConfig = array_key_exists($contentType, $ctConfigs) ? $ctConfigs[$contentType] : [];
     $ctConfigFields = array_key_exists('fields', $ctConfig) ? $ctConfig['fields'] : [];
@@ -132,42 +146,56 @@ function transliterate_node_presave(Drupal\node\NodeInterface $node) {
           $translatedEnValue = $fieldValue;
           if (is_string($fieldValue)) {
             $translatedValue = Transliterator::cyr2lat($fieldValue);
-            $translatedEnValue = Transliterator::cyr2en($fieldValue);
+            if ($googleTranslateEnabled) {
+              $translatedEnValue = Transliterator::cyr2en($fieldValue);
+            }
           } elseif (is_array($fieldValue) && count($fieldValue) > 0) {
             foreach ($fieldValue as $key => $value) {
               if (isset($fieldValue[0]['value'])) {
                 $translatedValue[$key]['value'] = is_string($translatedValue[$key]['value']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['value']) : $translatedValue[$key]['value'];
-                $translatedEnValue[$key]['value'] = is_string($translatedValue[$key]['value']) ?
-                  Transliterator::cyr2en($translatedEnValue[$key]['value']) : $translatedEnValue[$key]['value'];
+                if ($googleTranslateEnabled) {
+                  $translatedEnValue[$key]['value'] = is_string($translatedValue[$key]['value']) ?
+                    Transliterator::cyr2en($translatedEnValue[$key]['value']) : $translatedEnValue[$key]['value'];
+                }
               }
               if (isset($fieldValue[0]['description'])) {
                 $translatedValue[$key]['description'] = is_string($translatedValue[$key]['description']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['description']) : $translatedValue[$key]['description'];
-                $translatedEnValue[$key]['description'] = is_string($translatedEnValue[$key]['description']) ?
-                  Transliterator::cyr2en($translatedEnValue[$key]['description']) : $translatedEnValue[$key]['description'];
+                if ($googleTranslateEnabled) {
+                  $translatedEnValue[$key]['description'] = is_string($translatedEnValue[$key]['description']) ?
+                    Transliterator::cyr2en($translatedEnValue[$key]['description']) : $translatedEnValue[$key]['description'];
+                }
               }
               if (isset($fieldValue[0]['title'])) {
                 $translatedValue[$key]['title'] = is_string($translatedValue[$key]['title']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['title']) : $translatedValue[$key]['description'];
-                $translatedEnValue[$key]['title'] = is_string($translatedEnValue[$key]['title']) ?
-                  Transliterator::cyr2en($translatedEnValue[$key]['title']) : $translatedEnValue[$key]['description'];
+                if ($googleTranslateEnabled) {
+                  $translatedEnValue[$key]['title'] = is_string($translatedEnValue[$key]['title']) ?
+                    Transliterator::cyr2en($translatedEnValue[$key]['title']) : $translatedEnValue[$key]['description'];
+                }
               }
               if (isset($fieldValue[0]['alt'])) {
                 $translatedValue[$key]['alt'] = is_string($translatedValue[$key]['alt']) ?
                   Transliterator::cyr2lat($translatedValue[$key]['alt']) : $translatedValue[$key]['alt'];
-                $translatedEnValue[$key]['alt'] = is_string($translatedEnValue[$key]['alt']) ?
-                  Transliterator::cyr2en($translatedEnValue[$key]['alt']) : $translatedEnValue[$key]['alt'];
+                if ($googleTranslateEnabled) {
+                  $translatedEnValue[$key]['alt'] = is_string($translatedEnValue[$key]['alt']) ?
+                    Transliterator::cyr2en($translatedEnValue[$key]['alt']) : $translatedEnValue[$key]['alt'];
+                }
               }
             }
           }
 
           $latNode->{$fieldName} = $translatedValue;
-          $enNode->{$fieldName} = $translatedEnValue;
+          if ($googleTranslateEnabled) {
+            $enNode->{$fieldName} = $translatedEnValue;
+          }
         }
       }
       $latNode->setNewRevision(true);
-      $enNode->setNewRevision(true);
+      if ($googleTranslateEnabled) {
+        $enNode->setNewRevision(true);
+      }
     }
   }
 }
@@ -199,6 +227,19 @@ function _is_auto_transliterate_enabled_for_content_type(string $contentType): b
   $ct_configs = \Drupal::config('transliterate.settings')->get('content_types') ?? [];
   $ct_config = array_key_exists($contentType, $ct_configs) ? $ct_configs[$contentType] : [];
   return array_key_exists('enabled', $ct_config) ? (bool)(int)$ct_config['enabled'] : false;
+}
+
+
+/**
+ * Check weather auto translation is enabled for content type
+ *
+ * @param string $contentType
+ * @return bool
+ */
+function _is_google_auto_translate_enabled_for_content_type(string $contentType): bool {
+  $ct_configs = \Drupal::config('transliterate.settings')->get('content_types') ?? [];
+  $ct_config = array_key_exists($contentType, $ct_configs) ? $ct_configs[$contentType] : [];
+  return array_key_exists('google_translate_enabled', $ct_config) && (bool)(int)$ct_config['google_translate_enabled'];
 }
 
 /**

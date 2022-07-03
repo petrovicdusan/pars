@@ -60,6 +60,7 @@ class TransliterateSettingsForm extends ConfigFormBase {
       $ctype_settings = isset($allowed_types[$type]) ? $allowed_types[$type] : array();
       $fields_enabled = isset($ctype_settings['fields']) ? $ctype_settings['fields'] : array();
       $enabled = isset($ctype_settings['enabled']) ? $ctype_settings['enabled'] : 0;
+      $googleEnabled = isset($ctype_settings['google_translate_enabled']) ? $ctype_settings['google_translate_enabled'] : 0;
 
       $form['content_types'][$type] = array(
         '#type' => 'details',
@@ -71,6 +72,17 @@ class TransliterateSettingsForm extends ConfigFormBase {
         '#type' => 'checkbox',
         '#title' => $this->t('Enable auto transliteration for this content type.'),
         '#default_value' => $enabled,
+      );
+
+      $form['content_types'][$type]['google_translate_enabled'] = array(
+        '#type' => 'checkbox',
+        '#title' => $this->t('Enable auto google translate for this content type.'),
+        '#default_value' => $googleEnabled,
+        '#states' => array(
+          'invisible' => array(
+            ":input[name=\"content_types[$type][enabled]\"]" => array('checked' => FALSE),
+          ),
+        ),
       );
 
       $allowed_fields = array();
@@ -109,6 +121,7 @@ class TransliterateSettingsForm extends ConfigFormBase {
     $contentTypeValues = array_key_exists('content_types', $values) ? $values['content_types'] : [];
     foreach ($contentTypeValues as $ct => $ctValue) {
       $valuesToSave[$ct]['enabled'] = array_key_exists('enabled', $ctValue) ? (bool)(int)$ctValue['enabled'] : false;
+      $valuesToSave[$ct]['google_translate_enabled'] = array_key_exists('google_translate_enabled', $ctValue) && (bool)(int)$ctValue['google_translate_enabled'];
       $valuesToSave[$ct]['fields'] = [];
       if (array_key_exists('fields', $ctValue) && is_array($ctValue['fields'])) {
         foreach ($ctValue['fields'] as $fieldName => $fieldSetting) {
