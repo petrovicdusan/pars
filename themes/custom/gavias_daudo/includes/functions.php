@@ -6,7 +6,7 @@ function gavias_daudo_render_block($key) {
     ->getViewBuilder('block')
     ->view($block);
     return \Drupal::service('renderer')->render($block_content);
-  }  
+  }
   return '';
 }
 
@@ -22,7 +22,7 @@ function gavias_daudo_makeid($length = 5){
 function scrape_insta_hash($tag) {
    $insta_source = file_get_contents('https://www.instagram.com/'.trim($tag)); // instagrame tag url
    $shards = explode('window._sharedData = ', $insta_source);
-   $insta_json = explode(';</script>', $shards[1]); 
+   $insta_json = explode(';</script>', $shards[1]);
    $insta_array = json_decode($insta_json[0], TRUE);
    return $insta_array; // this return a lot things print it and see what else you need
 }
@@ -39,10 +39,10 @@ function gavias_daudo_preprocess_node(&$variables) {
   global $gva_node_index;
   $gva_node_index = $gva_node_index + 1;
   $variables['gva_node_index'] = $gva_node_index;
-  
+
   $date = $variables['node']->getCreatedTime();
   $variables['date'] = t(date( 'F', $date)) . ' ' . t(date( 'j', $date)) . ', ' .t(date( 'Y', $date));
-  
+
   if ($variables['teaser'] || !empty($variables['content']['comments']['comment_form'])) {
     unset($variables['content']['links']['comment']['#links']['comment-add']);
   }
@@ -77,11 +77,15 @@ function gavias_daudo_preprocess_node(&$variables) {
       $variables['gva_iframe'] = $iframe;
       $variables['post_format'] = $post_format;
   }
+  $nodeType = $variables['node']->getType();
+  if ($nodeType === 'news' && $variables['view_mode'] === 'full') {
+    $variables['#attached']['library'][] = 'gavias_daudo/news';
+  }
 }
 
 function gavias_daudo_preprocess_node__portfolio(&$variables){
   $node = $variables['node'];
-  
+
   // Override lesson list on single course
   $output = '';
   $count_information = 0;
@@ -106,7 +110,7 @@ function gavias_daudo_preprocess_node__event(&$variables){
   $event_date = array();
   if($node->hasField('field_event_start')){
     $event_start = $node->field_event_start->value;
-    if($event_start){ 
+    if($event_start){
       $event_date['day'] = \Drupal::service('date.formatter')->format(strtotime($event_start), 'custom', 'd');
       $event_date['month'] = \Drupal::service('date.formatter')->format(strtotime($event_start), 'custom', 'F');
     }
@@ -136,7 +140,7 @@ function gavias_daudo_preprocess_breadcrumb(&$variables){
       $variables['breadcrumb'][] = array(
           'text' => $title
       );
-    }  
+    }
   }
 }
 

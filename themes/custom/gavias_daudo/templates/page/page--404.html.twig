@@ -1,0 +1,156 @@
+{#
+/**
+ * @file
+ * Gavias's theme implementation to display a single Drupal page.
+ */
+#}
+{% set has_breadcrumb = '' %}
+<div class="gva-body-wrapper">
+  <div class="body-page gva-body-page">
+    {% include header_skin %}
+
+    {% if page.breadcrumbs %}
+      {% set has_breadcrumb = ' has-breadcrumb' %}
+      <div class="breadcrumbs">
+        {{ page.breadcrumbs }}
+      </div>
+    {% endif %}
+
+    <div role="main" class="main main-page{{ has_breadcrumb }}">
+
+      <div class="clearfix"></div>
+      {% if page.slideshow_content %}
+        <div class="slideshow_content area">
+          {{ page.slideshow_content }}
+        </div>
+      {% endif %}
+
+      {% if page.help %}
+        <div class="help gav-help-region">
+          <div class="container">
+            <div class="content-inner">
+              {{ page.help }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="clearfix"></div>
+      {% if page.before_content %}
+        <div class="before_content area">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                {{ page.before_content }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="clearfix"></div>
+
+      <div id="content" class="content content-full">
+        <div class="container container-bg">
+
+
+          <div class="content-main-inner">
+            <div class="row">
+
+              {% set cl_main = 'col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 order-xl-2 order-lg-2 order-md-1 order-sm-1 order-xs-1 ' %}
+              {% if page.sidebar_right and page.sidebar_left %}
+                {% set cl_main = 'col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 order-xl-2 order-lg-2 order-md-1 order-sm-1 order-xs-1 ' %}
+              {% elseif page.sidebar_right or page.sidebar_left %}
+                {% if page.sidebar_right %}
+                  {% set cl_main = 'col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 order-xl-2 order-lg-2 order-md-1 order-sm-1 order-xs-1 sb-r ' %}
+                {% endif %}
+                {% if page.sidebar_left %}
+                  {% set cl_main = 'col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 order-xl-2 order-lg-2 order-md-1 order-sm-1 order-xs-1 sb-l ' %}
+                {% endif %}
+              {% endif %}
+
+              <div id="page-main-content" class="main-content {{ cl_main }}">
+
+                <div class="main-content-inner">
+                  <!--- Start content -->
+                  <div class="content-layout">
+                    <div class="error-404 text-middle text-center">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="error-404-number">404</div>
+                        </div>
+                        <div class="col-12">
+                          <div class="text-center">
+                            <h2 class="text-medium">{% trans %}Sorry, This Page Could Not Be Found!{% endtrans %}</h2>
+                            <p>{% trans %}The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.{% endtrans %}</p>
+                            <a class="button" href="{{ front_page }}">{% trans %}Go Back to Homepage{% endtrans %}</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!---End content -->
+                </div>
+
+              </div>
+
+              <!-- Sidebar Left -->
+              {% if page.sidebar_left %}
+                {% set cl_left = 'col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-2 order-sm-2 order-xs-2' %}
+                {%	if page.sidebar_right %}
+                  {% set cl_left = 'col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-2 order-sm-2 order-xs-2' %}
+                {% endif %}
+
+                <div class="{{ cl_left }} sidebar sidebar-left">
+                  <div class="sidebar-inner">
+                    {{ page.sidebar_left }}
+                  </div>
+                </div>
+              {% endif %}
+              <!-- End Sidebar Left -->
+
+              <!-- Sidebar Right -->
+              {% if page.sidebar_right %}
+                {% set cl_right = 'col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 order-xl-3 order-lg-3 order-md-3 order-sm-3 order-xs-3'  %}
+                {% if page.sidebar_left %}
+                  {% set cl_right = 'col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12 order-xl-3 order-lg-3 order-md-3 order-sm-3 order-xs-3' %}
+                {% endif %}
+
+                <div class="{{ cl_right }} sidebar sidebar-right theiaStickySidebar">
+                  <div class="sidebar-inner">
+                    {{ page.sidebar_right }}
+                  </div>
+                </div>
+              {% endif %}
+              <!-- End Sidebar Right -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if page.highlighted %}
+        <div class="highlighted area">
+          <div class="container">
+            {{ page.highlighted }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if page.after_content %}
+        <div class="area after-content">
+          <div class="container">
+            <div class="content-inner">
+              {{ page.after_content }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+  {% include '@gavias_daudo/page/footer.html.twig' %}
+</div>
+
+{% include '@gavias_daudo/page/parts/quick-side.html.twig' %}

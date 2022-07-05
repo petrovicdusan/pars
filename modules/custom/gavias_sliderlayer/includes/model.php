@@ -12,9 +12,9 @@ function gavias_sliderlayer_load($sid) {
     $sliderlayers->status =  $result->status;
     $sliderlayers->sort_index =  $result->sort_index;
     $json = base64_decode($result->layersparams);
-    $sliderlayers->layers = json_decode($json);  
+    $sliderlayers->layers = json_decode($json);
     $json = base64_decode($result->params);
-    $sliderlayers->settings = json_decode($json);   
+    $sliderlayers->settings = json_decode($json);
   }
   return $sliderlayers;
 }
@@ -29,6 +29,7 @@ function gavias_sliders_by_group($gid=0) {
 }
 
 function gavias_slider_load_frontend($sid=0) {
+  $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $group = \Drupal::database()->select('{gavias_sliderlayergroups}', 'd')
           ->fields('d')
           ->condition('id', $sid, '=')
@@ -39,7 +40,7 @@ function gavias_slider_load_frontend($sid=0) {
             ->fields('d')
             ->condition('group_id', $sid, '=')
             ->orderBy('sort_index', 'ESC')
-            ->execute();     
+            ->execute();
 
   $slideshow = new stdClass();
 
@@ -69,6 +70,18 @@ function gavias_slider_load_frontend($sid=0) {
     for ($j = 0; $j < count($slideshow->slides[$i]->layers); $j++) {
       if ($slideshow->slides[$i]->layers[$j]->type == 'image' && !empty($slideshow->slides[$i]->layers[$j]->image_uri)) {
         $slideshow->slides[$i]->layers[$j]->image = ($slideshow->slides[$i]->layers[$j]->image_uri);
+      }
+      if (property_exists($slideshow->slides[$i]->layers[$j], 'title')) {
+        $slideshow->slides[$i]->layers[$j]->title = t($slideshow->slides[$i]->layers[$j]->title);
+      }
+      if (property_exists($slideshow->slides[$i]->layers[$j], 'text')) {
+        $slideshow->slides[$i]->layers[$j]->text = t($slideshow->slides[$i]->layers[$j]->text);
+      }
+      if (property_exists($slideshow->slides[$i]->layers[$j], 'link') &&
+        strpos($slideshow->slides[$i]->layers[$j]->link, '/node/') !== false) {
+        $link = \Drupal::service('path_alias.manager')->getAliasByPath(
+          $slideshow->slides[$i]->layers[$j]->link, $lang_code);
+        $slideshow->slides[$i]->layers[$j]->link = "/{$lang_code}{$link}";
       }
     }
     $i++;

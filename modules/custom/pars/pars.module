@@ -1,0 +1,60 @@
+<?php
+
+use Drupal\Core\Render\BubbleableMetadata;
+
+/**
+ * Implements hook_token_info()
+ */
+function pars_token_info() {
+  $info['tokens']['node']['news_node_path_prefix_alias'] = array(
+    'name' => t('News node path prefix'),
+    'description' => t('Url prefix for news nodes'),
+  );
+  $info['tokens']['node']['cooperation_node_path_prefix_alias'] = array(
+    'name' => t('Cooperation node path prefix'),
+    'description' => t('Url prefix for cooperation nodes'),
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_tokens()
+ *
+ * @param $type
+ * @param $tokens
+ * @param array $data
+ * @param array $options
+ * @param BubbleableMetadata $bubbleable_metadata
+ *
+ * @return array
+ */
+function pars_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = array();
+
+  foreach ($tokens as $name => $original) {
+    switch ($name) {
+      case 'news_node_path_prefix_alias': {
+        if (!empty($data['node']) && $data['node']->getType() == 'news') {
+          $node = 141;
+          $langCode = $data['node']->get('langcode')->value;
+          $prefix = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node, $langCode);
+          $prefix = ltrim($prefix, '/');
+          $replacements[$original] = $prefix;
+        }
+        break;
+      }
+      case 'cooperation_node_path_prefix_alias': {
+        if (!empty($data['node']) && $data['node']->getType() == 'cooperation') {
+          $node = $data['node']->get('field_cooperation_type')->value == 0 ? 144 : 143;
+          $langCode = $data['node']->get('langcode')->value;
+          $prefix = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node, $langCode);
+          $prefix = ltrim($prefix, '/');
+          $replacements[$original] = $prefix;
+        }
+        break;
+      }
+    }
+  }
+
+  return $replacements;
+}

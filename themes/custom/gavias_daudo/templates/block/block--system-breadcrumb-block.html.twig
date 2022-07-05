@@ -24,6 +24,8 @@
  * - title_suffix: Additional output populated by modules, intended to be
  *   displayed after the main title tag that appears in the template.
  *
+ * - custom_style !!!!!!
+ *
  * @see template_preprocess_block()
  *
  * @ingroup themeable
@@ -46,18 +48,18 @@
 <div class="breadcrumb-content-inner">
   <div class="gva-breadcrumb-content">
     <div{{ attributes.addClass(classes) }}>
-      <div class="breadcrumb-style gva-parallax-background" style="{{ custom_style }}">
+      <div class="breadcrumb-style gva-parallax-background">
           <div class="breadcrumb-content-main">
-            <h2 class="page-title">{{ breadcrumb_title }} </h2>
+{#            <h2 class="page-title">{{ breadcrumb_title }} </h2>#}
             {% block content %}
               <div class="{{ custom_classes }}">
                 <div{{ content_attributes.addClass('content block-content') }}>{{ content }}</div>
-              </div>  
+              </div>
             {% endblock %}
-          </div> 
-        <div class="gva-parallax-inner skrollable skrollable-between" data-bottom-top="top: -80%;" data-top-bottom="top: 0%;"></div>    
-      </div> 
-    </div>  
-  </div>  
-</div>  
+          </div>
+        <div class="gva-parallax-inner skrollable skrollable-between" data-bottom-top="top: -80%;" data-top-bottom="top: 0%;"></div>
+      </div>
+    </div>
+  </div>
+</div>
 

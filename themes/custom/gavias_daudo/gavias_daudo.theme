@@ -33,13 +33,13 @@ function gavias_daudo_preprocess_page(&$variables) {
   }
 
   $theme_path = \Drupal::service('extension.list.theme')->getPath('gavias_daudo');
-  
+
   $variables['sticky_menu'] = theme_get_setting('sticky_menu');
 
   $variables['preloader'] = theme_get_setting('preloader');
- 
+
   $variables['theme_path'] = $theme_path;
-  
+
   $variables['footer_first_size'] = theme_get_setting('footer_first_size');
   $variables['footer_second_size'] = theme_get_setting('footer_second_size');
   $variables['footer_third_size'] = theme_get_setting('footer_third_size');
@@ -54,7 +54,7 @@ function gavias_daudo_preprocess_page(&$variables) {
   if(isset($variables['gva_header']) && $variables['gva_header'] && $variables['gva_header']!='_none' ){
     $header = $variables['gva_header'];
   }
-  
+
   $header_skin = '';
   if($sub_theme){
     $theme_path_sub = drupal_get_path('theme', $sub_theme);
@@ -73,7 +73,7 @@ function gavias_daudo_preprocess_page(&$variables) {
   $variables['theme_path'] = $theme_path;
 
   $variables['header_skin'] = $header_skin;
- 
+
 }
 
 function gavias_daudo_preprocess_image(&$variables) {
@@ -100,7 +100,7 @@ function gavias_daudo_preprocess_html(&$variables) {
     if(strpos($current_url, '?')){
        $current_url .= '&';
     }
-    else{ 
+    else{
        $current_url .= '?';
     }
     $variables['current_url'] = $current_url;
@@ -111,6 +111,7 @@ function gavias_daudo_preprocess_html(&$variables) {
   $variables['site_logo'] = $tmp_logo['url'];
 
   $variables['theme_path'] = $theme_path;
+  $variables['node_id'] = \Drupal::request()->get('node') ? \Drupal::request()->get('node')->id() : null;
 
   if(theme_get_setting('customize_css') ){
     $custom_style  = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', theme_get_setting('customize_css') );
@@ -124,7 +125,7 @@ function gavias_daudo_preprocess_html(&$variables) {
 
   ob_start();
   $json = \Drupal::config('gaviasthemer.settings')->get('gavias_customize');
-  
+
   $variables['links_google_fonts'] = gavias_daudo_links_typography_font($json);
   require_once($theme_path . '/customize/dynamic_style.php');
   $customize_styles = ob_get_clean();
@@ -133,16 +134,16 @@ function gavias_daudo_preprocess_html(&$variables) {
 
   $variables['customize_styles'] = $customize_styles;
 
-  //Form customize 
+  //Form customize
   $user = \Drupal::currentUser();
 
   if(theme_get_setting('enable_customize') == 1 &&  \Drupal::moduleHandler()->moduleExists('gaviasthemer') && ($user->hasPermission('administer gavias_customize') || $user->hasPermission('administer gavias_customize preview')) ){
     $url_customize_save = Url::fromRoute('gaviasthemer.admin.customize_save', array(), array('absolute' => TRUE))->toString();
-    $variables['#attached']['drupalSettings']['gavias_customize']['save'] = $url_customize_save;  
+    $variables['#attached']['drupalSettings']['gavias_customize']['save'] = $url_customize_save;
     $url_customize_preview = Url::fromRoute('gaviasthemer.admin.customize_preview', array(), array('absolute' => TRUE))->toString();
-    $variables['#attached']['drupalSettings']['gavias_customize']['preview'] = $url_customize_preview;  
+    $variables['#attached']['drupalSettings']['gavias_customize']['preview'] = $url_customize_preview;
     $variables['#attached']['library'][] = 'gaviasthemer/customize';
- 
+
     $variables['#attached']['drupalSettings']['gavias_customize']['json'] = $json;
 
     $variables['addon_template'] = '';
@@ -167,7 +168,7 @@ function gavias_daudo_preprocess_html(&$variables) {
     }
     $variables['current_url'] = $current_url;
   }
-  
+
   //---- End customize gavias themer ---
 
   $skin = 'default';
@@ -244,7 +245,7 @@ function gavias_daudo_preprocess_block(&$variables) {
     $tmp_logo = theme_get_setting('logo');
     $variables['setting_logo'] = $tmp_logo['use_default'];
   }
-} 
+}
 
 function gavias_daudo_preprocess_block__system_breadcrumb_block(&$variables){
   $styles = array();
@@ -253,7 +254,7 @@ function gavias_daudo_preprocess_block__system_breadcrumb_block(&$variables){
   $bg_position = 'center center';
   $bg_repeat = 'no-repeat';
   $text_style = 'text-light';
-  
+
   if (!empty($variables['elements']['#id'])) {
     $block = Block::load($variables['elements']['#id']);
     if($variables['plugin_id'] == 'system_breadcrumb_block'){
@@ -296,7 +297,7 @@ function gavias_daudo_preprocess_block__system_breadcrumb_block(&$variables){
   $title = '';
   if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
     $title = \Drupal::service('title_resolver')->getTitle($request, $route);
-  } 
+  }
    $variables['breadcrumb_title'] = $title;
 }
 
@@ -353,7 +354,7 @@ function gavias_daudo_theme_suggestions_page_alter(array &$suggestions, array $v
           array_splice($suggestions, 1, 0, 'page__layout__' . $layout);
         }else{
           array_splice($suggestions, 1, 0, 'page__node__' . $node->getType());
-        } 
+        }
       }else{
         array_splice($suggestions, 1, 0, 'page__node__' . $node->getType());
       }
@@ -364,8 +365,8 @@ function gavias_daudo_theme_suggestions_page_alter(array &$suggestions, array $v
 }
 
 function gavias_daudo_theme_suggestions_field_alter(&$suggestions, $variables) {
-  $suggestions[] = 'field__' . 
-  $variables['element']['#field_name'] . '__' . 
+  $suggestions[] = 'field__' .
+  $variables['element']['#field_name'] . '__' .
   $variables['element']['#view_mode'];
 }
 

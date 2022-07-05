@@ -2,6 +2,7 @@
 
 namespace Drupal\pars\Bundle\Calendar;
 
+use DateTime;
 use Drupal\Core\Language\Language;
 
 class ParsCalendarRenderer {
@@ -23,7 +24,6 @@ class ParsCalendarRenderer {
     }
 
     //This puts the day, month, and year in seperate variables
-    $day = date('d', $date);
     $month = date('m', $date);
     $year = date('Y', $date);
     $today_day = date('d', time());
@@ -33,7 +33,7 @@ class ParsCalendarRenderer {
     $first_day = mktime(0, 0, 0, $month, 1, $year);
 
     //This gets us the month name
-    $title = date('F', $first_day);
+    $title = t(date('F', $first_day), [], ['langcode' => $variables['language'], 'context' => 'Long month name']);
 
     //Here we find out what day of the week the first day of the month falls on
     $day_of_week = date('D', $first_day);
@@ -55,7 +55,6 @@ class ParsCalendarRenderer {
     //Here we start building the table heads
     $calendar = new ParsCalendar($variables['language']);
 
-    //$calendar->addHeader('<a data-goto="'. $month . '-' . $year .'" href="' . '/' . $variables['language'] . '/' . locale('calendar', NULL, $variables['language']) . '/' . $month . '/' . $year . '">' . locale($title, NULL, $variables['language']) . ' ' . $year . '</a>', '1-' . intVal($month) . '-' . intval($year));
     $calendar->addHeader('<div>' . $title . ' ' . $year . '</div>', '1-' . intVal($month) . '-' . intval($year));
     //This counts the days in the week, up to 7
     $day_count = 1;
@@ -77,12 +76,13 @@ class ParsCalendarRenderer {
     $day_num = 1;
 
     //Get nodes that are set to appear in calendar in this month
-//    $events = _pars_calendar_get_events($variables);
-    $events = [];
+    $fetcher = new CalendarFetcher();
+    $monthStart = new DateTime("{$year}-{$month}-01");
+    $monthEnd = new DateTime(date("Y-m-t", strtotime("{$year}-{$month}-01")));
+    $events = $fetcher->fetchEvents($monthStart, $monthEnd);
     //count up the days, untill we've done all of them in the month
     while ($day_num <= $days_in_month) {
       $classes  = array('day-cell');
-      $as_link = array();
       if ($day_num == $today_day && $today_month == $month && $today_year == $year) $classes[] = 'today-day-class';
 
       if($day_count >= 7) {
@@ -92,27 +92,21 @@ class ParsCalendarRenderer {
       $day_hover_data = array();
 
       foreach($events as $event) {
-        if($day_num == $event['day']) {
-          $nid = $event['nid'];
-          $day_hover_data[] = array(
-            'nid' => $nid,
-            'title' => $event['title']
-          );
-        }
-        if($day_num == $event['day'] && (!in_array('day-cell-event-rnids-event', $classes) || !in_array('day-cell-event-other-event', $classes))) {
+        /** @var DateTime $date */
+        $date = $event['date'];
+        if($day_num == $date->format('d')) {
           $classes[] = 'day-cell-event';
-//          $node = node_load($nid);
-          $node = (object)[];
-          $as_link = array(
-            //'href' => 'calendar/' . $day_num . '/' . $month . '/' . $year,
-            'day_num' => $day_num,
-            'post_date' => $node->created,
-            'month' => $month,
-            'year' => $year,
+          $day_hover_data[] = array(
+            'nid' => $event['nid'],
+            'link' => $event['link'],
+            'title' => $event['title'],
+            'from' => $event['from'],
+            'to' => $event['to'],
+            'date' => $event['date'],
           );
         }
       }
-      $calendar->addCell($day_num, $classes, $as_link, $day_hover_data, $variables['language']);
+      $calendar->addCell($day_num, $classes, $day_hover_data, $variables['language']);
       $day_num++;
       $day_count++;
 

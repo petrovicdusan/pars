@@ -2,6 +2,8 @@
 
 namespace Drupal\pars\Bundle\Calendar;
 
+use DateTime;
+
 /**
  * Calendar build helper. Mostly useful for dynamically class addition
  */
@@ -27,12 +29,12 @@ class ParsCalendar {
 									<tr>
 										<th class='nav'>
                       <a href='#' data-goto='{$date_prev}' data-lang='{$this->language}'>
-                        <div class='calendar-nav calendar-nav-left'></div>
+                        <div class='calendar-nav calendar-nav-left fas fa-angle-left'></div>
                       </a>
                     </th>
 										<th class='pars-calendar-block-title' colspan=5>{$value}</th>
 										<th class='nav'><a href='#' data-goto='{$date_next}' data-lang='{$this->language}'>
-                      <div class='calendar-nav calendar-nav-right'></div></a>
+                      <div class='calendar-nav calendar-nav-right fas fa-angle-right'></div></a>
                     </th>
                   </tr>
 								</thead>";
@@ -69,108 +71,43 @@ class ParsCalendar {
   /**
    * Adds <td> to table adn sets all of ot's data
    */
-  public function addCell($value, $class = [], $link = [], $day_hover_data = [], $language = []) {
-    $classes   = '';
-    $data_date = '';
-    $dat       = '';
-    if (!empty($link)) {
-      if ($language == 'sr') $page_url = 'календар-догађаја';
-      elseif ($language == 'sr-lat') $page_url = 'kalendar-dogadjaja';
-      elseif ($language == 'en') $page_url = 'event-calendar';
-      $day   = $link['day_num'];
-      $month = $link['month'];
-      $year  = $link['year'];
-    }
-    if (!empty($class)) {
-      $classes = 'class="' . implode(' ', $class) . '"';
-    }
+  public function addCell($value, $classArr = [], $day_hover_data = [], $language = []) {
+    $classes = !empty($classArr) ? 'class="' . implode(' ', $classArr) . '"' : '';
 
     if (!empty($day_hover_data)) {
-      $list = '<div class="pars-tooltip">
-						<ul>';
+      $list = '<div class="pars-tooltip"><ul>';
       foreach ($day_hover_data as $data) {
-        if (!empty($link)) {
-          $nid      = $data['nid'];
-          $link_url = '/' . $page_url . '?d=' . $day . '&m=' . $month . '&y=' . $year . '&e=' . $nid . '#' . $day . '-' . $nid;
-        } else {
-          $link_url = "";
-        }
+        $link  = $data['link'];
+        $titleLabel = t('Title');
+        $fromLabel = t('From');
+        $toLabel = t('To');
+        $dateLabel = t('Date');
 
-        $list .=
-          '<li class="pars-tooltip-list-element"><a href="' . $link_url . '"><div>'
-          . strlen($data['title']) > 50 ? substr($data['title'], 0, 50) . "..." : $data['title']
-            . '</div></a></li>';
+        $title = strlen($data['title']) > 50 ? substr($data['title'], 0, 50) . "..." : $data['title'];
+        /** @var DateTime $from */
+        $from = $data['from'];
+        /** @var DateTime $to */
+        $to = $data['to'];
+        /** @var DateTime $date */
+        $date = $data['date'];
+        $list  .= "<li class='pars-tooltip-list-element'>
+                    <a href='{$link}' target='_blank'>
+                        <span class='title'><strong>{$titleLabel}</strong>: {$title}</span>
+                        <span class='date'><strong>{$dateLabel}</strong>: {$date->format('d.m.Y.')}</span>
+                        <span class='from'><strong>{$fromLabel}</strong>: {$from->format('d.m.Y.')}</span>
+                        <span class='to'><strong>{$toLabel}</strong>: {$to->format('d.m.Y.')}</span>
+                    </a>
+                  </li>";
       }
       $list  .= '</ul></div>';
       $value .= $list;
     }
-    $this->calendar .= '<td ' . $classes . '><div class="table-cell-inside-div" ' . $data_date . ' >' . $value . '</div></td>';
+    $this->calendar .= "<td {$classes}><div class='table-cell-inside-div'>{$value}</div></td>";
   }
 
   public function finish() {
     $this->calendar .= '</tbody></table>';
     return $this->calendar;
-  }
-
-  private function getData($year, $month) {
-//    $month = !empty($variables['month']) ? $variables['month'] : date('m', time());
-//    $year  = !empty($variables['year']) ? $variables['year'] : date('Y', time());
-
-    $date_field_name_from = 'field_' . MS_CALENDAR_CALENDAR_DATE_FIELD_NAME . '_value';
-    $date_field_name_to   = 'field_' . MS_CALENDAR_CALENDAR_DATE_FIELD_NAME . '_value2';
-
-    $query = db_select('node', 'n')->fields('n', ['nid', 'title', 'created']);
-    $query->condition('n.status', 1)->condition('n.language', $variables['language']);
-    $query->condition('n.type', '%' . db_like('event') . '%', 'LIKE');
-
-    $res    = $query->execute();
-    $events = [];
-
-    while ($row = $res->fetchObject()) {
-      $q = db_select(MS_CALENDAR_CALENDAR_DATE_FIELD_TABLE, 't')->fields('t', [$date_field_name_from, $date_field_name_to])->condition('entity_id', $row->nid);
-
-      $day_from   = intval(format_date($row->created, 'custom', 'd'));
-      $month_from = intval(format_date($row->created, 'custom', 'm'));
-      $year_from  = intval(format_date($row->created, 'custom', 'Y'));
-      $day_to     = intval(format_date($row->created, 'custom', 'd'));
-      $month_to   = intval(format_date($row->created, 'custom', 'm'));
-      $year_to    = intval(format_date($row->created, 'custom', 'Y'));
-      $r          = $q->execute();
-      if ($rw = $r->fetchObject()) {
-        $day_from   = intval(format_date(strtotime($rw->{$date_field_name_from}), 'custom', 'd'));
-        $month_from = intval(format_date(strtotime($rw->{$date_field_name_from}), 'custom', 'm'));
-        $year_from  = intval(format_date(strtotime($rw->{$date_field_name_from}), 'custom', 'Y'));
-        $day_to     = intval(format_date(strtotime($rw->{$date_field_name_to}), 'custom', 'd'));
-        $month_to   = intval(format_date(strtotime($rw->{$date_field_name_to}), 'custom', 'm'));
-        $year_to    = intval(format_date(strtotime($rw->{$date_field_name_to}), 'custom', 'Y'));
-      }
-      if ($month != $month_from || $year != $year_from || $month != $month_to || $year != $year_to) continue;
-      if (!empty($day) && !($day > $day_from && $day < $day_to)) continue;
-      for ($ii = $day_from; $ii <= $day_to; $ii++) {
-        $events[] = [
-          'title' => $row->title,
-          'nid'   => $row->nid,
-          'day'   => $ii,
-        ];
-      }
-    }
-
-    $partSorted = [];
-    foreach ($events as $event) {
-      $partSorted[$event['day']][$event['nid']] = $event['title'];
-    }
-
-    $eventsSorted = [];
-    foreach ($partSorted as $day => $nidArray) {
-      foreach ($nidArray as $nid => $title) {
-        $eventsSorted[] = [
-          'title' => $title,
-          'nid'   => $nid,
-          'day'   => $day,
-        ];
-      }
-    }
-    return $eventsSorted;
   }
 
 }

@@ -27,11 +27,11 @@ if(!function_exists('gavias_content_builder_makeid')){
 function gavias_pagebuilder_includes( $path, $ifiles=array() ){
     if( !empty($ifiles) ){
          foreach( $ifiles as $key => $file ){
-            $file  = $path.'/'.$file; 
+            $file  = $path.'/'.$file;
             if(is_file($file)){
                 require($file);
             }
-         }   
+         }
     }else {
         $files = glob($path);
         foreach ($files as $key => $file) {
@@ -44,8 +44,8 @@ function gavias_pagebuilder_includes( $path, $ifiles=array() ){
 
 /*================================================
                 Block for theme
-=================================================*/  
-if(!function_exists('gavias_content_builder_get_blocks_options')){ 
+=================================================*/
+if(!function_exists('gavias_content_builder_get_blocks_options')){
   function gavias_content_builder_get_blocks_options() {
     static $_blocks_array = array();
       if (empty($_blocks_array)) {
@@ -66,7 +66,7 @@ if(!function_exists('gavias_content_builder_get_blocks_options')){
   }
 }
 
-if(!function_exists('gavias_content_builder_render_block')){ 
+if(!function_exists('gavias_content_builder_render_block')){
   function gavias_content_builder_render_block($key) {
     $block = \Drupal\block\Entity\Block::load($key);
     if($block){

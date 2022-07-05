@@ -3,8 +3,6 @@
 namespace Drupal\pars\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Language\Language;
-use Drupal\pars\Bundle\Calendar\ParsCalendar;
 use Drupal\pars\Bundle\Calendar\ParsCalendarRenderer;
 
 /**

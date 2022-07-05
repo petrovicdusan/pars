@@ -1,8 +1,8 @@
 jQuery(document).ready(function($) {
 
 	function showLoader() {
-		var $loader = $(document.createElement("div")).attr("id", "pars-calendar-ajax-loader").show();
-		$("#block-calendarblock div.content").append($loader);
+		var $loader = jQuery(document.createElement("div")).attr("id", "pars-calendar-ajax-loader").show();
+		jQuery("#block-calendarblock div.content").append($loader);
 	}
 	function hideLoader() {
 		jQuery("#pars-calendar-ajax-loader").remove();
@@ -11,22 +11,21 @@ jQuery(document).ready(function($) {
 	showLoader();
 
 	/*===================== TOOLTIP ============================*/
-	var viewportWidth = $(window).width();
-	var viewportHeight = $(window).height();
+	var viewportWidth = jQuery(window).width();
+	var viewportHeight = jQuery(window).height();
 	var narrowScreen = false;
 
-	$(window).resize(function() {
-		viewportWidth = $(window).width();
-		viewportHeight = $(window).height();
+	jQuery(window).resize(function() {
+		viewportWidth = jQuery(window).width();
+		viewportHeight = jQuery(window).height();
 		setWeekdaysWidth();
 		adjustViewsHeight();
 	});
 	setWeekdaysWidth();
-	var pars_calendar_block = $('#pars-calendar-block');
 	var $tooltip;
-	$('#pars-calendar-block .day-cell-event').live("mouseover", function(ev) {
-		var $cell = $(this);
-		$tooltip = $($(this).find(".pars-tooltip"));
+	jQuery('#pars-calendar-block .day-cell-event').live("mouseover", function(ev) {
+		var $cell = jQuery(this);
+		$tooltip = jQuery(jQuery(this).find(".pars-tooltip"));
 		var tooltipHeight = $tooltip.height();
 		$tooltip.css({
 			top: parseInt($cell.position().top + $cell.height()+5) +"px",
@@ -49,30 +48,30 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	$('#pars-calendar-block .day-cell-event .pars-tooltip.activeTooltip').live("mouseover", function(){
-		$(this).removeClass("inactiveTooltip");
-		$(this).removeClass("tdTooltipHover");
-		$(this).addClass("tooltipHover");
-		$(this).addClass("activeTooltip");
+	jQuery('#pars-calendar-block .day-cell-event .pars-tooltip.activeTooltip').live("mouseover", function(){
+		jQuery(this).removeClass("inactiveTooltip");
+		jQuery(this).removeClass("tdTooltipHover");
+		jQuery(this).addClass("tooltipHover");
+		jQuery(this).addClass("activeTooltip");
 	}).live("mouseout", function() {
-		$(this).removeClass("tooltipHover")
-		if(!$(this).hasClass("tdTooltipHover")){
-			$(this).addClass("inactiveTooltip");
+		jQuery(this).removeClass("tooltipHover")
+		if(!jQuery(this).hasClass("tdTooltipHover")){
+			jQuery(this).addClass("inactiveTooltip");
 		}
 	});
 	/*================== NAVIGATION ========================*/
-	$("#pars-calendar-block .calendar-nav").live("click", function(e) {
+	jQuery("#pars-calendar-block .calendar-nav").live("click", function(e) {
 		showLoader();
-		var date = $(this).closest("a").data("goto");
-		var language = $(this).closest("a").data("lang");
+		var date = jQuery(this).closest("a").data("goto");
+		var language = jQuery(this).closest("a").data("lang");
 		$.ajax({
 			url: "/calendar-navigation?date=" + date + "&language=" + language,
 			type: "GET",
 			dataType: "json",
 			success: function(data) {
 				showLoader();
-				$("#block-calendarblock div.content").html(data.calendar);
-				$("#pars-calendar-read-more").attr("href", $(".pars-calendar-block-title a").attr("href"));
+				jQuery("#block-calendarblock div.content").html(data.calendar);
+				jQuery("#pars-calendar-read-more").attr("href", jQuery(".pars-calendar-block-title a").attr("href"));
 				setWeekdaysWidth();
 			}
 		});
@@ -82,19 +81,19 @@ jQuery(document).ready(function($) {
 	});
 
 	//============= BACK TO MONTHLY VIEW LINK ==========================
-	$("#pars-calendar-block .pars-calendar-daily-view-margin .level-up").live("click", function(e) {
+	jQuery("#pars-calendar-block .pars-calendar-daily-view-margin .level-up").live("click", function(e) {
 		showLoader();
 
-		var date = $("#pars-calendar-block-wrapper .pars-calendar-block-title a").data("goto");
-		var language = $("#pars-calendar-block").attr("lang");
+		var date = jQuery("#pars-calendar-block-wrapper .pars-calendar-block-title a").data("goto");
+		var language = jQuery("#pars-calendar-block").attr("lang");
 		$.ajax({
       url: "/calendar-navigation?date=" + date + "&language=" + language,
 			type: "GET",
 			dataType: "json",
 			success: function(data) {
 				showLoader();
-				$("#block-calendarblock div.content").html(data.calendar);
-				$("#pars-calendar-read-more").attr("href", $(".pars-calendar-block-title a").attr("href"));
+				jQuery("#block-calendarblock div.content").html(data.calendar);
+				jQuery("#pars-calendar-read-more").attr("href", jQuery(".pars-calendar-block-title a").attr("href"));
 				setWeekdaysWidth();
 			}
 		});
@@ -104,17 +103,17 @@ jQuery(document).ready(function($) {
 	});
 
 	// Prevent link around navbar
-	$("#pars-calendar-block th.nav a").live("click", function(e) {
+	jQuery("#pars-calendar-block th.nav a").live("click", function(e) {
 		e.preventDefault();
 		return false;
 	});
 	/*============= READ MORE LINK ===============*/
-	$("#pars-calendar-read-more").attr("href", $(".pars-calendar-block-title a").attr("href"));
+	jQuery("#pars-calendar-read-more").attr("href", jQuery(".pars-calendar-block-title a").attr("href"));
 
 	hideLoader();
 
 	//============= DISABLE TOOLTIP CLICK AND HOVER ====================
-	$("#pars-calendar-block .day-cell-event .pars-tooltip").live("click, mouseover", function(e) {
+	jQuery("#pars-calendar-block .day-cell-event .pars-tooltip").live("click, mouseover", function(e) {
 		e.preventDefault();
 		return false;
 	});
@@ -122,13 +121,13 @@ jQuery(document).ready(function($) {
 	//======================== MOBILE TOUCH EVENT FIXES ======================
 
 	// Daily view
-	$("#pars-calendar-block .day-cell-event").live('touchstart', function(e) {
-	  $(this).trigger("click");
+	jQuery("#pars-calendar-block .day-cell-event").live('touchstart', function(e) {
+	  jQuery(this).trigger("click");
 	  e.preventDefault();
 	});
 	// GO back link
-	$("#pars-calendar-block .pars-calendar-daily-view-margin .level-up").live('touchstart', function(e) {
-		  $(this).trigger("click");
+	jQuery("#pars-calendar-block .pars-calendar-daily-view-margin .level-up").live('touchstart', function(e) {
+		  jQuery(this).trigger("click");
 		  e.preventDefault();
 	});
 
@@ -139,13 +138,13 @@ jQuery(document).ready(function($) {
 	 */
 	function setWeekdaysWidth() {
 		if(viewportWidth <= 780) {
-			$("#pars-calendar-block-wrapper #pars-calendar-block .day-title-cell").each(function() {
-				$(this).html($(this).attr("data-name").substr(0, 3));
+			jQuery("#pars-calendar-block-wrapper #pars-calendar-block .day-title-cell").each(function() {
+				jQuery(this).html(jQuery(this).attr("data-name").substr(0, 3));
 			});
 		}
 		else {
-			$("#pars-calendar-block-wrapper #pars-calendar-block .day-title-cell").each(function() {
-				$(this).html($(this).attr("data-name"));
+			jQuery("#pars-calendar-block-wrapper #pars-calendar-block .day-title-cell").each(function() {
+				jQuery(this).html(jQuery(this).attr("data-name"));
 			});
 		}
 	}
@@ -154,14 +153,9 @@ jQuery(document).ready(function($) {
 	 * Adjusts height of monthly/daily view on resize, rotate etc.
 	 */
 	function adjustViewsHeight() {
-		$blockHeight = $("#pars-calendar-block-wrapper").height();
-		$title = $("#block-pars-calendar-pars-calendar .pars-calendar-view-title");
-		var offset = $title.height() + parseInt($title.css("marginTop")) + parseInt($title.css("marginBottom") + parseInt($("#pars-calendar-block-wrapper .pars-calendar-daily-view").css("margin-bottom")));
-		$("#pars-calendar-view").css("height", parseInt($blockHeight - offset) + "px");
-		$("#pars-calendar-view").slimScroll({
-			position: 'right',
-			railVisible: false,
-			alwaysVisible: false
-		});
+		$blockHeight = jQuery("#pars-calendar-block-wrapper").height();
+		$title = jQuery("#block-pars-calendar-pars-calendar .pars-calendar-view-title");
+		var offset = $title.height() + parseInt($title.css("marginTop")) + parseInt($title.css("marginBottom") + parseInt(jQuery("#pars-calendar-block-wrapper .pars-calendar-daily-view").css("margin-bottom")));
+		jQuery("#pars-calendar-view").css("height", parseInt($blockHeight - offset) + "px");
 	}
 });

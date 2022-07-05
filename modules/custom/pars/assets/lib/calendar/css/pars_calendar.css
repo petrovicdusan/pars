@@ -25,6 +25,12 @@
   border-top-width: 0;
   border-bottom-width: 1px;
   display: table-cell;
+  text-align: center;
+}
+
+#pars-calendar-block tr th:last-child,
+#pars-calendar-block tr td.day-title-cell:last-child {
+  border-right-width: 0;
 }
 
 #pars-calendar-block td {
@@ -48,12 +54,18 @@
   vertical-align: middle;
 }
 
+#pars-calendar-block td.day-cell.day-cell-event {
+  background-color: #3B7EFF;
+  color: #ffffff;
+  border-radius: 0;
+}
+
 #pars-calendar-block td.not-this-month {
   color: rgb(180, 180, 180);
 }
 
 #pars-calendar-block td.day-cell-right {
-  border-right: 0px;
+  border-right: 0;
 }
 
 td.day-cell.today-day-class {
@@ -86,7 +98,13 @@ td.day-cell.today-day-class {
 }
 
 #pars-calendar-block .today-day-class .table-cell-inside-div {
-  border: 1px solid;
+  border: 1px solid #ccc;
+  border-radius: 35px;
+  background-color: #ffffff;
+  font-weight: bold;
+}
+#pars-calendar-block .today-day-class.day-cell-event .table-cell-inside-div {
+  color: #000000;
 }
 
 /*======== MONTHLY AND DAILY VIEW ===========*/
@@ -118,7 +136,7 @@ td.day-cell.today-day-class {
 }
 
 #pars-calendar-block tbody tr:FIRST-CHILD td {
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 
 #pars-calendar-block .pars-calendar-view-title {
@@ -198,9 +216,10 @@ ul#pars-calendar-view {
 
 .pars-calendar-block-title {
   text-align: center;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   font-weight: normal;
   font-size: 16px;
+  line-height: 40px;
 }
 
 #block-calendarblock div.content .pars-calendar-view-subtext {
@@ -239,7 +258,7 @@ ul#pars-calendar-view {
   text-align: center;
   margin: 0 auto;
   width: 27px;
-  height: 27px;
+  height: 40px;
   padding: 0;
   cursor: pointer;
 }
@@ -254,21 +273,16 @@ ul#pars-calendar-view {
   cursor: pointer;
 }
 
-#pars-calendar-block tr th a div.calendar-nav-left {
-  background: url("../images/left-nav-icon.png") center;
-  background-repeat: no-repeat;
-}
-
-#pars-calendar-block tr th a div.calendar-nav-right {
-  background: url("../images/right-nav-icon.png") center;
-  background-repeat: no-repeat;
+#pars-calendar-block tr th a div.calendar-nav-left:before,
+#pars-calendar-block tr th a div.calendar-nav-right:before {
+  line-height: 40px;
 }
 
 /*========== TOOLTIP ==============*/
 .pars-tooltip {
   display: none;
-  min-width: 150px;
-  width: 85%;
+  min-width: 200px;
+  /*width: 85%;*/
   height: auto;
   position: absolute;
   border: 1px solid #e5e5e5;
@@ -276,7 +290,7 @@ ul#pars-calendar-view {
   z-index: 999;
   line-height: 12px;
   color: #777;
-  padding: 5px 0 5px 25px;
+  padding: 15px;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -305,16 +319,20 @@ ul#pars-calendar-view {
   text-align: left;
   padding-bottom: 5px;
   padding-top: 5px;
+  padding-left: 5px;
   line-height: 16px;
+  border-bottom: 1px solid #eee;
+  list-style: none;
 }
 
 #pars-calendar-block .pars-tooltip ul li a {
   color: #787878;
   text-decoration: none;
+  font-weight: normal;
 }
 
 #pars-calendar-block .pars-tooltip ul li span {
-  display: table-cell;
+  display: block;
 }
 
 /*========== READ MORE ============*/
