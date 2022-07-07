@@ -48,6 +48,20 @@ img.logo-site {
 .frontpage .node--view-mode-full .node__content {
   margin-bottom: 0;
 }
+.frontpage .statistic-block p {
+  white-space: initial;
+  color: #ffffff;
+}
+.frontpage .statistic-block pre {
+  font-family: "Open Sans" !important;
+  margin: 0;
+}
+.frontpage .statistic-block .gsc-heading.style-1 .title-desc {
+  margin-top: 0;
+}
+.frontpage .statistic-block .milestone-block {
+  margin: 25px 0;
+}
 .node--view-mode-full .node__content h1,
 .node--view-mode-full .node__content h2 {
   margin: 25px 0;
