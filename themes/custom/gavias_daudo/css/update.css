@@ -22,6 +22,12 @@ img.logo-site {
   display: block !important;
 }
 
+
+/** MENU */
+.main-menu .navigation .gva_menu > li > a {
+  padding: 35px 5px;
+}
+
 .node {
   color: #36454f;
 }

@@ -15,13 +15,10 @@ class CalendarNavigationController extends ControllerBase {
     $date = trim(stripcslashes($request->get('date')));
     $date = explode('-', $date);
     $language = trim(stripcslashes($request->get('language')));
-    $renderer = new ParsCalendarRenderer();
-    $variables = [
-      'month'    => intval($date[0]),
-      'year'     => intval($date[1]),
-      'language' => $language,
-    ];
+    $month = intval($date[0]);
+    $year = intval($date[1]);
 
-    return new JsonResponse(['calendar' => $renderer->render($variables), 'status'=> 200]);
+    $renderer = new ParsCalendarRenderer();
+    return new JsonResponse(['calendar' => $renderer->render($month, $year, $language), 'status'=> 200]);
   }
 }

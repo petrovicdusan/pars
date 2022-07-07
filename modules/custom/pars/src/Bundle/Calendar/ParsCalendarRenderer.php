@@ -2,25 +2,28 @@
 
 namespace Drupal\pars\Bundle\Calendar;
 
+use DateInterval;
 use DateTime;
 use Drupal\Core\Language\Language;
 
 class ParsCalendarRenderer {
 
   /**
-   * @param $variables
+   * @param integer|null $month
+   * @param integer|null $year
+   * @param string|null $language
    * @return string
+   * @throws \Exception
    */
-  public function render($variables = []) {
-    $day_hover_data = array();
-    $variables['language'] = array_key_exists('language', $variables) ? $variables['language'] : \Drupal::languageManager()->getCurrentLanguage()->getId();
+  public function render(int $month = null, int $year = null, string $language = null): string {
+    $language = $language ?? \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     //Get date
-    if(empty($variables['month']) || empty($variables['year']) ) {
+    if(!isset($month) || !isset($year) ) {
       $date = time();
     }
     else {
-      $date = strtotime('01-' . $variables['month'] . '-' . $variables['year']);
+      $date = strtotime('01-' . $month . '-' . $year);
     }
 
     //This puts the day, month, and year in seperate variables
@@ -33,7 +36,7 @@ class ParsCalendarRenderer {
     $first_day = mktime(0, 0, 0, $month, 1, $year);
 
     //This gets us the month name
-    $title = t(date('F', $first_day), [], ['langcode' => $variables['language'], 'context' => 'Long month name']);
+    $title = t(date('F', $first_day), [], ['langcode' => $language, 'context' => 'Long month name']);
 
     //Here we find out what day of the week the first day of the month falls on
     $day_of_week = date('D', $first_day);
@@ -53,7 +56,7 @@ class ParsCalendarRenderer {
     $days_in_month = cal_days_in_month(0, $month, $year) ;
 
     //Here we start building the table heads
-    $calendar = new ParsCalendar($variables['language']);
+    $calendar = new ParsCalendar($language);
 
     $calendar->addHeader('<div>' . $title . ' ' . $year . '</div>', '1-' . intVal($month) . '-' . intval($year));
     //This counts the days in the week, up to 7
@@ -80,7 +83,7 @@ class ParsCalendarRenderer {
     $monthStart = new DateTime("{$year}-{$month}-01");
     $monthEnd = new DateTime(date("Y-m-t", strtotime("{$year}-{$month}-01")));
     $events = $fetcher->fetchEvents($monthStart, $monthEnd);
-    //count up the days, untill we've done all of them in the month
+    //count up the days, until we've done all of them in the month
     while ($day_num <= $days_in_month) {
       $classes  = array('day-cell');
       if ($day_num == $today_day && $today_month == $month && $today_year == $year) $classes[] = 'today-day-class';
@@ -106,7 +109,7 @@ class ParsCalendarRenderer {
           );
         }
       }
-      $calendar->addCell($day_num, $classes, $day_hover_data, $variables['language']);
+      $calendar->addCell($day_num, $classes, $day_hover_data, $language);
       $day_num++;
       $day_count++;
 
@@ -134,5 +137,54 @@ class ParsCalendarRenderer {
     $calendar->closeRowTag();
 
     return $calendar->finish();
+  }
+
+  /**
+   * Render list of events for next $weekNum weeks
+   *
+   * @param DateTime $dateFrom
+   * @param integer $weekNum
+   * @param string|null $language
+   * @return string
+   */
+  public function renderList(DateTime $dateFrom, int $weekNum, string $language = null): string {
+    $fetcher = new CalendarFetcher();
+    $dateTo = clone $dateFrom;
+    $dateTo->modify("+ {$weekNum} week");
+
+    $t = 't';
+    $data = [];
+    $events  = $fetcher->fetchEvents($dateFrom, $dateTo);
+    foreach ($events as $event) {
+      $data[$event['nid']] = $event;
+    }
+
+    $result = <<<EOT
+      <table class="calendar-table table mt-2">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">{$t('Title')}</th>
+            <th scope="col">{$t('From')}</th>
+            <th scope="col">{$t('To')}</th>
+          </tr>
+        </thead>
+        <tbody>
+EOT;
+
+    foreach (array_values($data) as $key => $ev) {
+      $rowNum = $key + 1;
+      $result .= <<<EOT
+        <tr>
+          <th scope="row">{$rowNum}</th>
+          <td>{$ev['title']}</td>
+          <td>{$ev['from']->format('d.m.Y.')}</td>
+          <td>{$ev['to']->format('d.m.Y.')}</td>
+        </tr>
+EOT;
+    }
+    $result .= "</tbody></table>";
+
+    return $result;
   }
 }

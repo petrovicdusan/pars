@@ -7,12 +7,12 @@ use Drupal\pars\Bundle\Calendar\ParsCalendarRenderer;
 
 /**
  * @Block(
- *   id = "calendar_block",
- *   admin_label = @Translation("Calendar block"),
- *   category = @Translation("Calendar block")
+ *   id = "calendar_list_block",
+ *   admin_label = @Translation("Calendar list block"),
+ *   category = @Translation("Calendar list block")
  * )
  */
-class CalendarBlock extends BlockBase {
+class CalendarListBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
@@ -22,7 +22,7 @@ class CalendarBlock extends BlockBase {
 
     return [
       '#type' => 'markup',
-      '#markup' => $renderer->render(null, null, \Drupal::languageManager()->getCurrentLanguage()->getId()),
+      '#markup' => $renderer->renderList(new \DateTime(), 2, \Drupal::languageManager()->getCurrentLanguage()->getId()),
       '#attached' => [
         'library' => [
           'pars/calendar'
