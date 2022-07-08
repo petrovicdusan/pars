@@ -83,7 +83,7 @@ class ParsCalendar {
         $toLabel = t('To');
         $dateLabel = t('Date');
 
-        $title = strlen($data['title']) > 50 ? substr($data['title'], 0, 50) . "..." : $data['title'];
+        $title = $data['title'];
         /** @var DateTime $from */
         $from = $data['from'];
         /** @var DateTime $to */

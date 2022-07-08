@@ -95,6 +95,9 @@ img.logo-site {
   height: 100%;
   background-position: center;
 }
+.frontpage .latest-news .post-style-list .post-block.teaser-2 .post-image {
+  height: 200px;
+}
 .node--view-mode-full .node__content h1,
 .node--view-mode-full .node__content h2 {
   margin: 25px 0;

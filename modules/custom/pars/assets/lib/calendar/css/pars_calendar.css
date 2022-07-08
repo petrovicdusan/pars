@@ -281,7 +281,7 @@ ul#pars-calendar-view {
 /*========== TOOLTIP ==============*/
 .pars-tooltip {
   display: none;
-  min-width: 200px;
+  width: 300px;
   /*width: 85%;*/
   height: auto;
   position: absolute;

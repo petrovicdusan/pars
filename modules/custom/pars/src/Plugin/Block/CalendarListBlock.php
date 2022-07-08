@@ -3,6 +3,7 @@
 namespace Drupal\pars\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Render\Markup;
 use Drupal\pars\Bundle\Calendar\ParsCalendarRenderer;
 
 /**
@@ -19,10 +20,11 @@ class CalendarListBlock extends BlockBase {
    */
   public function build() {
     $renderer = new ParsCalendarRenderer();
+    $content = $renderer->renderList(new \DateTime(), 2, \Drupal::languageManager()->getCurrentLanguage()->getId());
 
     return [
       '#type' => 'markup',
-      '#markup' => $renderer->renderList(new \DateTime(), 2, \Drupal::languageManager()->getCurrentLanguage()->getId()),
+      '#markup' => Markup::create($content),
       '#attached' => [
         'library' => [
           'pars/calendar'
