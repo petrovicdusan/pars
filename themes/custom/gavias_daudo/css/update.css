@@ -67,6 +67,7 @@ img.logo-site {
   display: flex;
   flex-direction: column;
   text-align: center;
+  padding: 30px 20px;
 }
 .frontpage .frontpage-relative-institutions.gsc-service-carousel .center .item .content-inner {
   background: #fff;
