@@ -2187,6 +2187,12 @@ body.maintenance-page {
   float: left;
 }
 
+.post-style-list .post-block.teaser-2 .post-image {
+  width: 100%;
+  float: none;
+  display: block;
+}
+
 @media (max-width: 575.98px) {
   .post-style-list .post-block .post-image {
     width: 100%;
@@ -2213,6 +2219,12 @@ body.maintenance-page {
   width: 60%;
   padding-left: 30px;
   float: left;
+}
+
+.post-style-list .post-block.teaser-2 .post-content {
+  width: 100%;
+  float: none;
+  display: block;
 }
 
 @media (max-width: 575.98px) {

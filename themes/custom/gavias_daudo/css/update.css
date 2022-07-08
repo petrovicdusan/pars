@@ -225,8 +225,13 @@ img.logo-site {
   margin-right: 5px;
   display: none;
   vertical-align: middle;
-  flex: 1 0 20%;
+  flex: 1 0 24%;
   text-align: center;
+  overflow: hidden;
+}
+.node--type-news .content-main .node__content .field--name-field-slike .field__item img {
+  width: 100%;
+  height: auto;
 }
 .node--type-news .content-main .node__content .field--name-field-slike .field__item:nth-child(1),
 .node--type-news .content-main .node__content .field--name-field-slike .field__item:nth-child(2),
