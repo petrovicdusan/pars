@@ -134,8 +134,22 @@ img.logo-site {
   line-height: 1;
 }
 /* FRONT */
+.frontpage .frontpage-banners .gsc-service-carousel .item .portfolio-images:after {
+  background: transparent;
+}
 .frontpage .frontpage-banners .gsc-service-carousel .item .content-inner {
-  min-height: 335px;
+  background: transparent;
+}
+.frontpage .frontpage-banners .gsc-service-carousel .center .item .content-inner {
+  background: transparent;
+  box-shadow: transparent;
+}
+.frontpage .frontpage-banners .gsc-service-carousel .item .content-inner .title {
+  color: #ffffff;
+  text-shadow: 0 1px black;
+  background: rgba(0,0,0,0.5);
+  padding: 0 10px;
+  border-radius: 5px;
 }
 .frontpage .social-sharing-buttons {
   display: none;
