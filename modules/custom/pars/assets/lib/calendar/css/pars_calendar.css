@@ -675,10 +675,19 @@ ul#pars-calendar-view {
   height: 100%;
 }
 
-.calendar-table tr:last-child td:first-child {
-  border-bottom-left-radius: 5px;
+table.calendar-table {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  border-collapse: separate;
+  padding: 5px;
 }
 
-.calendar-table tr:last-child td:last-child {
-  border-bottom-right-radius: 5px;
+table.calendar-table tbody tr td,
+table.calendar-table thead tr th {
+  border: 0;
 }
+
+table.calendar-table thead tr th {
+  border-bottom: 1px solid #ccc;
+}
+

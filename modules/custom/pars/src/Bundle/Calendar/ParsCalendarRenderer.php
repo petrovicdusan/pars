@@ -82,7 +82,7 @@ class ParsCalendarRenderer {
     $fetcher = new CalendarFetcher();
     $monthStart = new DateTime("{$year}-{$month}-01");
     $monthEnd = new DateTime(date("Y-m-t", strtotime("{$year}-{$month}-01")));
-    $events = $fetcher->fetchEvents($monthStart, $monthEnd);
+    $events = $fetcher->fetchEvents($monthStart, $monthEnd, $language);
     //count up the days, until we've done all of them in the month
     while ($day_num <= $days_in_month) {
       $classes  = array('day-cell');
@@ -148,13 +148,14 @@ class ParsCalendarRenderer {
    * @return string
    */
   public function renderList(DateTime $dateFrom, int $weekNum, string $language = null): string {
+    $language = $language ?? \Drupal::languageManager()->getCurrentLanguage()->getId();
     $fetcher = new CalendarFetcher();
     $dateTo = clone $dateFrom;
     $dateTo->modify("+ {$weekNum} week");
 
     $t = 't';
     $data = [];
-    $events  = $fetcher->fetchEvents($dateFrom, $dateTo);
+    $events  = $fetcher->fetchEvents($dateFrom, $dateTo, $language);
     foreach ($events as $event) {
       $data[$event['nid']] = $event;
     }
@@ -163,20 +164,17 @@ class ParsCalendarRenderer {
       <table class="calendar-table table mt-2">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">{$t('Title')}</th>
-            <th scope="col">{$t('From')}</th>
-            <th scope="col">{$t('To')}</th>
+            <th scope="col">{$t('Title', [], ['langcode' => $language])}</th>
+            <th scope="col">{$t('From', [], ['langcode' => $language])}</th>
+            <th scope="col">{$t('To', [], ['langcode' => $language])}</th>
           </tr>
         </thead>
         <tbody>
 EOT;
 
     foreach (array_values($data) as $key => $ev) {
-      $rowNum = $key + 1;
       $result .= <<<EOT
         <tr>
-          <th scope="row">{$rowNum}</th>
           <td>{$ev['title']}</td>
           <td>{$ev['from']->format('d.m.Y.')}</td>
           <td>{$ev['to']->format('d.m.Y.')}</td>

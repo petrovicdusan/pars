@@ -23,7 +23,7 @@ class CalendarFetcher {
    *  link: string,
    * }
    */
-  public function fetchEvents(DateTime $from, DateTime $to): array {
+  public function fetchEvents(DateTime $from, DateTime $to, $languageCode = null): array {
     $monthStart = new DrupalDateTime($from->format('Y-m-d'));
     $monthEnd = new DrupalDateTime($to->format('Y-m-d'));
     $query = \Drupal::entityQuery('node');
@@ -62,6 +62,11 @@ class CalendarFetcher {
 
     $result = [];
     foreach ($nodes as $node) {
+      $title = $node->getTitle();
+      if ($node->hasTranslation($languageCode)) {
+        $translation = $node->getTranslation($languageCode);
+        $title = $translation->label();
+      }
       $startDate = new DateTime($node->get('field_event_start')->value);
       $endDate = new DateTime($node->get('field_event_end')->value);
 
@@ -71,7 +76,7 @@ class CalendarFetcher {
       foreach ($period as $dt) {
         $result[] = [
           'nid' => $node->id(),
-          'title' => $node->getTitle(),
+          'title' => $title,
           'date' => new DateTime($dt->format('Y-m-d')),
           'link' => $node->toUrl()->toString(),
           'from' => $startDate,
