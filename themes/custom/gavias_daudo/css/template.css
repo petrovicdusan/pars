@@ -603,6 +603,40 @@ body {
   overflow: hidden !important;
   position: relative;
   font-family: "Open Sans" !important;
+  font-size: 13px;
+}
+
+body h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 30px;
+  font-style: normal;
+  text-transform: none;
+}
+
+body h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 27px;
+  line-height: 27px;
+  font-style: normal;
+  text-transform: none;
+}
+
+body h3 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+  font-style: normal;
+  text-transform: none;
+}
+
+body h4 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  line-height: 18px;
+  font-style: normal;
+  text-transform: none;
 }
 
 body.boxed {
@@ -1016,7 +1050,7 @@ header.header-default .header-main-inner .header-inner {
 }
 
 header.header-default .header-main-inner .gva-offcanvas-mobile {
-  float: right;
+  float: left;
 }
 
 header.header-default .gva-search-region {

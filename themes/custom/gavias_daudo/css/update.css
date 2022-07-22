@@ -26,6 +26,7 @@ img.logo-site {
 /** MENU */
 .main-menu .navigation .gva_menu > li > a {
   padding: 35px 5px;
+  font-weight: normal;
 }
 
 .node {
@@ -104,7 +105,7 @@ img.logo-site {
 }
 .node--view-mode-full .node__content h3,
 .node--view-mode-full .node__content h4 {
-  margin: 0 0 15px;
+  margin: 15px 0;
 }
 .node--view-mode-full .node__content ul {
   padding-left: 36px;
@@ -271,4 +272,7 @@ img.logo-site {
 }
 .post-style-list .post-block .post-image img {
   transition: transform 2s, filter 2s ease-in-out;
+}
+.post-block .post-title {
+  font-weight: 500;
 }
