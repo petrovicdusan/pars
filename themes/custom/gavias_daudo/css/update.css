@@ -64,11 +64,15 @@ img.logo-site {
   margin: 25px 0;
 }
 .frontpage .frontpage-relative-institutions.gsc-service-carousel .item .content-inner {
-  height: 300px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   text-align: center;
   padding: 30px 20px;
+}
+.frontpage .frontpage-relative-institutions.gsc-service-carousel .item .content-inner .title {
+  margin: 5px 0;
+  font-size: 15px;
 }
 .frontpage .frontpage-relative-institutions.gsc-service-carousel .center .item .content-inner {
   background: #fff;
@@ -83,7 +87,7 @@ img.logo-site {
   color: #ffffff;
 }
 .frontpage .frontpage-relative-institutions.gsc-service-carousel .item .content-inner .icon {
-  height: 60%;
+  height: 80%;
   margin: auto 0 0;
 }
 .frontpage .frontpage-relative-institutions.gsc-service-carousel .item .content-inner .icon .republic-of-serbia {
@@ -273,4 +277,6 @@ img.logo-site {
 .post-style-list .post-block .post-image img {
   transition: transform 2s, filter 2s ease-in-out;
 }
-
+.gbb-row-wrapper .gsc-service-carousel .item .content-inner .title {
+  font-weight: normal;
+}

@@ -378,7 +378,7 @@ a.disable {
   font-size: 14px;
   font-family: "Open Sans";
   color: #788592;
-  font-weight: 500;
+  font-weight: normal;
 }
 
 .breadcrumb-content-inner .gva-block-breadcrumb .breadcrumb-links nav.breadcrumb ol li a {
@@ -1828,7 +1828,7 @@ body.maintenance-page {
 .post-block .post-title a {
   color: #000;
   word-wrap: break-word;
-  font-weight: 500;
+  font-weight: normal;
 }
 
 .post-block .post-title a:hover, .post-block .post-title a:active, .post-block .post-title a:before {
