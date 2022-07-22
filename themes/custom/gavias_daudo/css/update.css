@@ -273,6 +273,4 @@ img.logo-site {
 .post-style-list .post-block .post-image img {
   transition: transform 2s, filter 2s ease-in-out;
 }
-.post-block .post-title {
-  font-weight: 500;
-}
+

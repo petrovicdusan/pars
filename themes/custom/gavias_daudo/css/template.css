@@ -133,7 +133,7 @@ ul.menu > li > a {
   -ms-transition: all 0.35s;
   position: relative;
   font-family: "Open Sans";
-  font-size: 16px;
+  font-size: 14px;
 }
 
 ul.menu > li > a:hover, ul.menu > li > a:active, ul.menu > li > a:focus {
@@ -1828,6 +1828,7 @@ body.maintenance-page {
 .post-block .post-title a {
   color: #000;
   word-wrap: break-word;
+  font-weight: 500;
 }
 
 .post-block .post-title a:hover, .post-block .post-title a:active, .post-block .post-title a:before {
